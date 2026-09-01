@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n-title="meta.work.title">أعمالنا | أوفرسايت</title>
+<meta name="description" data-i18n-content="meta.work.desc" content="نماذج من مشاريع الفحص الهندسي التي أنجزناها في المملكة.">
+<meta name="theme-color" content="#04070a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="header-light">
+
+<a class="skip-link" href="#main" data-i18n="nav.skip">تخطَّ إلى المحتوى</a>
+
+<!-- ====================== HEADER ====================== -->
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a class="brand" href="index.html" aria-label="Oversight">
+      <img class="brand__mark" src="assets/img/logo-dark.svg" alt="Oversight" width="260" height="46">
+    </a>
+
+    <nav class="nav" id="primary-nav" data-open="false" aria-label="Primary">
+      <a href="index.html" data-i18n="nav.home">الرئيسية</a>
+      <a href="about.html" data-i18n="nav.about">من نحن</a>
+      <a href="work.html" aria-current="page" data-i18n="nav.work">أعمالنا</a>
+      <a href="services.html" data-i18n="nav.services">خدمات</a>
+      <a href="contact.html" data-i18n="nav.contact">تواصل معنا</a>
+    </nav>
+
+    <div class="header-tools">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-switch__btn" type="button" data-lang-btn="ar" aria-pressed="true">العربية</button>
+        <span class="lang-switch__sep">|</span>
+        <button class="lang-switch__btn" type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--ghost-light btn--sm" href="tel:+966500000000" data-i18n="cta.call">اتصل</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"
+              data-i18n-aria="nav.menu" aria-label="القائمة">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1h16M1 7h16M1 13h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ====================== HERO ====================== -->
+  <section class="hero hero--compact">
+    <div class="shell hero__inner">
+      <div class="hero__copy">
+        <h1 data-i18n="work.hero.h1">أعمالنا: عقارات فُحصت، ومشاكل كُشفت قبل أن تُكلّف</h1>
+        <p class="lede" data-i18n="work.hero.lede">نماذج حقيقية من تقاريرنا، بأرقامها ونتائجها. أسماء العملاء محجوبة حفاظاً على السرية.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PORTFOLIO ====================== -->
+  <section class="section section--light" style="padding-block-start:0">
+    <div class="shell">
+      <div class="plan__tabs" role="tablist" data-filter-group="#work-grid" data-reveal>
+        <button class="chip" role="tab" type="button" data-filter="all" aria-selected="true"  data-i18n="work.filter.all">الكل</button>
+        <button class="chip" role="tab" type="button" data-filter="res" aria-selected="false" data-i18n="work.filter.res">سكني</button>
+        <button class="chip" role="tab" type="button" data-filter="com" aria-selected="false" data-i18n="work.filter.com">تجاري</button>
+        <button class="chip" role="tab" type="button" data-filter="ind" aria-selected="false" data-i18n="work.filter.ind">صناعي</button>
+      </div>
+
+      <div class="grid grid--3" id="work-grid" data-reveal>
+
+        <article class="work-card" data-cat="res">
+          <div class="work-card__media">
+            <img src="assets/img/work-villa-riyadh.jpg" alt="" data-i18n-alt="work1.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work1.type">سكني</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work1.title">فيلا جديدة — شمال الرياض</h3>
+            <p data-i18n="work1.text">فحص ما قبل الشراء كشف تسرّباً نشطاً تحت العزل المائي للسطح، ونقطتي سخونة في اللوحة الرئيسية.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work1.area">٤٥٠ م²</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work1.findings">٣١ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work1.saved">١٨٠ ألف ريال</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card" data-cat="com">
+          <div class="work-card__media">
+            <img src="assets/img/work-office-riyadh.jpg" alt="" data-i18n-alt="work2.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work2.type">تجاري</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work2.title">مبنى مكتبي — طريق الملك عبدالله</h3>
+            <p data-i18n="work2.text">فحص دوري لسبعة أدوار شمل الأحمال الكهربائية وكفاءة التكييف.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work2.area">٣٢٠٠ م²</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work2.findings">٦٤ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work2.saved">٢٢٪ من فاتورة الطاقة</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card" data-cat="res">
+          <div class="work-card__media">
+            <img src="assets/img/work-compound.jpg" alt="" data-i18n-alt="work3.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work3.type">سكني</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work3.title">مجمّع سكني — ٢٤ وحدة</h3>
+            <p data-i18n="work3.text">فحص استلام لكل وحدة قبل التسليم للمالكين، بقائمة ملاحظات مصوّرة لكل وحدة.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work3.area">٢٤ وحدة</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work3.findings">٤١٢ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work3.saved">٣٩ إصلاحاً قبل التوقيع</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card" data-cat="ind">
+          <div class="work-card__media">
+            <img src="assets/img/work-warehouse-dammam.jpg" alt="" data-i18n-alt="work4.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work4.type">صناعي</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work4.title">مستودع لوجستي — الدمام</h3>
+            <p data-i18n="work4.text">تقييم إنشائي للأرضيات الخرسانية وأنظمة التأريض قبل تركيب رفوف تخزين عالية الأحمال.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work4.area">٨٠٠٠ م²</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work4.findings">١٩ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work4.saved">إعادة تصميم رفوف طابقين</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card" data-cat="res">
+          <div class="work-card__media">
+            <img src="assets/img/work-apartment-jeddah.jpg" alt="" data-i18n-alt="work5.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work5.type">سكني</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work5.title">شقة مستعملة — جدة</h3>
+            <p data-i18n="work5.text">فحص ما قبل الشراء لشقة عمرها ١٨ سنة، شمل تقدير العمر المتبقي للعزل والتكييف والسباكة.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work5.area">١٦٥ م²</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work5.findings">٢٧ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work5.saved">٦٥ ألف ريال</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card" data-cat="com">
+          <div class="work-card__media">
+            <img src="assets/img/work-cafe-khobar.jpg" alt="" data-i18n-alt="work6.imgAlt" width="1200" height="800" loading="lazy">
+            <span class="work-card__type" data-i18n="work6.type">تجاري</span>
+          </div>
+          <div class="work-card__body">
+            <h3 data-i18n="work6.title">مطعم ومقهى — الخبر</h3>
+            <p data-i18n="work6.text">فحص كهروميكانيكي قبل التشغيل شمل أحمال المطبخ وشفّاطات الهواء ومطابقة اللوحات لمتطلبات الدفاع المدني.</p>
+            <div class="work-card__meta">
+              <div><span data-i18n="work.meta.area">المساحة</span><strong data-i18n="work6.area">٤٢٠ م²</strong></div>
+              <div><span data-i18n="work.meta.findings">الملاحظات</span><strong data-i18n="work6.findings">٢٣ ملاحظة</strong></div>
+              <div><span data-i18n="work.meta.saved">وفّرنا للعميل</span><strong data-i18n="work6.saved">تفادي إيقاف الترخيص</strong></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== TESTIMONIALS ====================== -->
+  <section class="section section--dark">
+    <div class="shell">
+      <h2 class="h-md text-center" data-reveal data-i18n="home.quotes.h2">استمع إلى ما يقوله عملاؤنا</h2>
+
+      <div class="rail-wrap" data-rail data-reveal>
+        <div class="rail">
+          <article class="quote-card">
+            <div class="quote-card__glyph" aria-hidden="true">”</div>
+            <blockquote data-i18n="q1.text">أنقذني فحص أوفرسايت قبل التوقيع على شراء فيلا جديدة بالرياض.</blockquote>
+            <div class="quote-card__who"><strong data-i18n="q1.name">عبدالله الشمري</strong><span data-i18n="q1.city">الرياض</span></div>
+          </article>
+          <article class="quote-card">
+            <div class="quote-card__glyph" aria-hidden="true">”</div>
+            <blockquote data-i18n="q2.text">كنت أعاني لسنوات من رطوبة في غرفة النوم بلا سبب واضح.</blockquote>
+            <div class="quote-card__who"><strong data-i18n="q2.name">منى العتيبي</strong><span data-i18n="q2.city">الرياض</span></div>
+          </article>
+          <article class="quote-card">
+            <div class="quote-card__glyph" aria-hidden="true">”</div>
+            <blockquote data-i18n="q3.text">نتعامل معهم على مستوى محفظة عقارية كاملة.</blockquote>
+            <div class="quote-card__who"><strong data-i18n="q3.name">فيصل القحطاني</strong><span data-i18n="q3.city">جدة</span></div>
+          </article>
+          <article class="quote-card">
+            <div class="quote-card__glyph" aria-hidden="true">”</div>
+            <blockquote data-i18n="q4.text">الفحص قبل الاستلام كان أفضل مبلغ صرفته في العقار كله.</blockquote>
+            <div class="quote-card__who"><strong data-i18n="q4.name">ريم الدوسري</strong><span data-i18n="q4.city">الخبر</span></div>
+          </article>
+        </div>
+
+        <div class="rail-controls">
+          <button class="rail-btn" type="button" data-rail-prev data-i18n-aria="home.quotes.prev" aria-label="السابق">
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="rail-dots"></div>
+          <button class="rail-btn" type="button" data-rail-next data-i18n-aria="home.quotes.next" aria-label="التالي">
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CTA BAND ====================== -->
+  <section class="section section--dark-glow">
+    <div class="shell cta-band__grid">
+      <div data-reveal>
+        <h2 class="h-md" data-i18n="cta.h2">تواصل مباشرة مع المهندس المختص</h2>
+        <p class="lede mt-lg" data-i18n="cta.lede">مهندسونا على أتمّ الاستعداد لإجابة استفساراتكم وجدولة زيارات الفحص بأسرع وقت ممكن.</p>
+        <div class="btn-row mt-lg">
+          <a class="btn btn--primary" href="https://wa.me/966500000000" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.03.24-3.47-.72-2.94-1.16-4.79-4.2-4.94-4.4-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36s.39 0 .56.01c.19.01.44-.07.68.53.24.6.83 2.02.9 2.17.07.14.12.31.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.14-.3.3-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.65-.14.27.09 1.68.79 1.97.94.29.14.48.22.55.34.07.13.07.75-.17 1.44Z"/></svg>
+            <span data-i18n="cta.whatsapp">تواصل معنا عبر واتساب</span>
+          </a>
+          <a class="btn btn--ghost-light" href="tel:+966500000000">
+            <span data-i18n="cta.callUs">اتصل بنا هاتفياً</span>
+          </a>
+        </div>
+      </div>
+      <div class="cta-band__media" data-reveal>
+        <img src="assets/img/map-riyadh.jpg" alt="" data-i18n-alt="cta.mapAlt" width="1280" height="880" loading="lazy">
+        <span class="pin" data-i18n="cta.pin">مقرّنا الرئيسي: الرياض، المملكة العربية السعودية</span>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div class="site-footer__about">
+        <img src="assets/img/logo-light.svg" alt="Oversight" width="260" height="46" style="height:34px">
+        <p data-i18n="footer.about">فحص هندسي دقيق، وتقارير يعتمدها المستثمرون والمطوّرون وشركات التمويل، لكل عقار سكني أو تجاري في المملكة.</p>
+        <div class="socials" aria-label="Social">
+          <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.9l-4.6-6.6L5.9 22H2.8l7.3-8.3L2 2h7.1l4.3 6.1L18.9 2Zm-1.2 18h1.9L7.4 3.9H5.4L17.7 20Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C21 8.65 22 10.6 22 13.9V21h-4v-6.3c0-1.5-.54-2.53-1.9-2.53-1.03 0-1.65.7-1.92 1.37-.1.24-.13.58-.13.92V21h-4V9Z"/></svg></a>
+          <a href="https://wa.me/966500000000" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.03.24-3.47-.72-2.94-1.16-4.79-4.2-4.94-4.4-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36s.39 0 .56.01c.19.01.44-.07.68.53.24.6.83 2.02.9 2.17.07.14.12.31.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.14-.3.3-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.65-.14.27.09 1.68.79 1.97.94.29.14.48.22.55.34.07.13.07.75-.17 1.44Z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h3 data-i18n="footer.linksTitle">روابط سريعة</h3>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="footer.link.home">الرئيسية</a></li>
+          <li><a href="about.html" data-i18n="footer.link.about">عن أوفرسايت</a></li>
+          <li><a href="services.html" data-i18n="footer.link.services">خدماتنا</a></li>
+          <li><a href="index.html#kit" data-i18n="footer.link.kit">أجهزتنا</a></li>
+          <li><a href="index.html#faq" data-i18n="footer.link.faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 data-i18n="footer.contactTitle">معلومات التواصل</h3>
+        <ul class="footer-contact">
+          <li><strong data-i18n="footer.phone">الهاتف</strong>: <a class="ltr" href="tel:+966500000000">+966 50 000 0000</a></li>
+          <li><strong data-i18n="footer.email">البريد الإلكتروني</strong>: <a class="ltr" href="mailto:info@ovrsight-sa.com">info@ovrsight-sa.com</a></li>
+          <li><strong data-i18n="footer.hours">ساعات العمل</strong>: <span data-i18n="footer.hoursValue">من السبت إلى الخميس، ٩ صباحاً – ٥ مساءً</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bar">
+      <span data-i18n="footer.rights">جميع الحقوق محفوظة لأوفرسايت Oversight © 2026</span>
+      <span><a href="#" data-i18n="footer.privacy">سياسة الخصوصية</a> · <a href="#" data-i18n="footer.terms">الشروط والأحكام</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/966500000000" target="_blank" rel="noopener">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.03.24-3.47-.72-2.94-1.16-4.79-4.2-4.94-4.4-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36s.39 0 .56.01c.19.01.44-.07.68.53.24.6.83 2.02.9 2.17.07.14.12.31.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.14-.3.3-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.65-.14.27.09 1.68.79 1.97.94.29.14.48.22.55.34.07.13.07.75-.17 1.44Z"/></svg>
+  <span data-i18n="cta.wa">واتساب</span>
+</a>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

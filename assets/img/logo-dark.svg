@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 46" role="img" aria-label="Oversight">
+  <defs>
+    <linearGradient id="ovs-eye" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5fe3d5"/>
+      <stop offset="1" stop-color="#0f9086"/>
+    </linearGradient>
+  </defs>
+  <!-- eye mark -->
+  <g transform="translate(2 6)">
+    <path d="M1 17C1 17 8.2 4 17.5 4S34 17 34 17s-7.2 13-16.5 13S1 17 1 17Z"
+          fill="none" stroke="url(#ovs-eye)" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle cx="17.5" cy="17" r="5.6" fill="url(#ovs-eye)"/>
+    <circle cx="19.6" cy="14.7" r="1.7" fill="#04070a" opacity=".55"/>
+  </g>
+  <!-- wordmark -->
+  <text x="46" y="31"
+        font-family="'IBM Plex Sans Arabic','Inter',system-ui,sans-serif"
+        font-size="23" font-weight="700" letter-spacing="3.4" fill="#0b1417">OVERSIGHT</text>
+</svg>
