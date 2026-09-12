@@ -1,0 +1,81 @@
+.acc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.acc__item {
+  background: var(--c-white);
+  border: 1px solid var(--c-black);
+  border-radius: 0; /* Figma FAQ rows are square */
+  transition: border-color 0.2s ease;
+}
+
+.acc__item.is-open {
+  border-color: var(--c-black);
+}
+
+.acc__heading {
+  margin: 0;
+}
+
+.acc__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-20);
+  padding: var(--s-24) var(--s-32);
+  text-align: start;
+}
+
+.acc__q {
+  font-size: var(--fs-h6);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  color: var(--c-black);
+}
+
+.acc__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--c-teal-wash);
+  color: var(--c-teal-900);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.acc__item.is-open .acc__icon {
+  background: var(--c-teal-900);
+  color: var(--c-white);
+}
+
+.acc__panel {
+  padding: 0 var(--s-32) var(--s-24);
+}
+
+.acc__a {
+  font-size: var(--fs-lead);
+  line-height: 30px;
+  color: var(--c-black);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .acc__trigger {
+    padding: var(--s-16) var(--s-20);
+  }
+  .acc__q {
+    font-size: var(--fs-lead);
+  }
+  .acc__panel {
+    padding: 0 var(--s-20) var(--s-20);
+  }
+  .acc__a {
+    font-size: var(--fs-body);
+    line-height: 26px;
+  }
+}

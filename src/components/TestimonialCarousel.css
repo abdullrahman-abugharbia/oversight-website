@@ -1,0 +1,193 @@
+/* =========================================================
+   Testimonial slider — Figma: 998px viewport, 724x448 cards,
+   24px gutter, #141819 fill, #22686d border with a 6px TOP
+   edge, r=16. The active card sits flush to the inline-end of
+   the viewport and the previous card peeks 250px behind it.
+   Controls: two 35px circles + a 143x11 dot group.
+   ========================================================= */
+.tst {
+  display: flex;
+  flex-direction: column;
+  gap: 66px; /* Figma: cards end y=660, controls y=754 */
+  --tst-card: 724px;
+  --tst-gap: 24px;
+}
+
+.tst__viewport {
+  overflow: hidden;
+  width: 998px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.tst__track {
+  display: flex;
+  gap: var(--tst-gap);
+  /* No justify-content here: it re-anchors the items to the container edge on
+     every shift and cancels the margin-inline-start offset, freezing the slider.
+     The active card lands at the inline-start of the viewport, with the next one
+     peeking — which is what Figma shows. */
+}
+
+/* Direction-aware shift — translateX would need opposite signs per direction */
+.tst__slide:first-child {
+  transition: margin-inline-start 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tst__slide {
+  flex: 0 0 var(--tst-card);
+}
+
+.tst__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Figma cards are 448 tall; min-height keeps that for quotes that fit and
+     lets longer ones grow instead of overflowing the card. */
+  min-height: 448px;
+  margin: 0;
+  padding: 48px;
+  background: #141819;
+  border: 1px solid var(--c-teal-900);
+  border-block-start-width: 6px; /* Figma: individualStrokeWeights.top = 6 */
+  border-radius: var(--r-16);
+  transition: opacity 0.35s ease;
+}
+
+.tst__slide[aria-hidden='true'] .tst__card {
+  opacity: 0.55;
+}
+
+/* Figma: 46x46 quotation glyph at y=48 */
+.tst__quote-mark {
+  font-size: 46px;
+  line-height: 1;
+  color: var(--c-teal-400);
+  font-family: Georgia, 'Times New Roman', serif;
+  height: 46px;
+}
+
+.tst__quote {
+  margin: var(--s-16) 0 var(--s-24);
+  font-size: var(--fs-base-lg); /* 24px / 500 */
+  font-weight: var(--fw-medium);
+  line-height: 44px;
+  color: var(--c-white);
+  max-width: 534px;
+}
+
+.tst__person {
+  display: flex;
+  align-items: center;
+  gap: var(--s-16);
+  margin-block-start: auto;
+}
+
+.tst__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-teal-400), var(--c-teal-900));
+  flex-shrink: 0;
+}
+
+.tst__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+.tst__name {
+  font-size: var(--fs-base-lg); /* 24px / 600 */
+  font-weight: var(--fw-semibold);
+  color: var(--c-white);
+}
+
+.tst__city {
+  font-size: var(--fs-base-lg); /* 24px / 400 */
+  font-weight: var(--fw-regular);
+  color: var(--c-white);
+}
+
+/* ---------- Controls: Figma 35px circles, 143x11 dots ---------- */
+.tst__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-16);
+}
+
+.tst__controls > button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid var(--c-white);
+  color: var(--c-white);
+  background: transparent;
+  transition: all 0.18s ease;
+}
+
+.tst__controls > button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Figma: the trailing control is a solid white circle */
+.tst__controls > button:last-child {
+  background: var(--c-white);
+  color: var(--c-ink);
+  border-color: var(--c-white);
+}
+
+.tst__controls > button:last-child:hover {
+  background: var(--c-teal-400);
+}
+
+.tst__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+  width: 143px;
+  justify-content: center;
+}
+
+.tst__dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.tst__dots button.is-active {
+  width: 34px;
+  border-radius: var(--r-pill);
+  background: var(--c-teal-400);
+}
+
+@media (max-width: 1080px) {
+  .tst {
+    --tst-card: min(724px, 88vw);
+    gap: var(--s-40);
+  }
+  .tst__viewport {
+    width: 100%;
+  }
+  .tst__track {
+    justify-content: flex-start;
+  }
+  .tst__card {
+    height: auto;
+    min-height: 380px;
+    padding: var(--s-32);
+  }
+  .tst__quote {
+    font-size: var(--fs-lead);
+    line-height: 32px;
+  }
+  .tst__name,
+  .tst__city {
+    font-size: var(--fs-body);
+  }
+}

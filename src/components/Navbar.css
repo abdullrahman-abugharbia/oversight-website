@@ -1,0 +1,340 @@
+.nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 60;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+.nav--overlay {
+  background: transparent;
+}
+
+.nav--solid {
+  /* Solid rather than translucent+backdrop-filter: a blurred backdrop on a
+     fixed header forces a full-page compositing layer, which causes repaint
+     artifacts on long pages. Matches the Figma nav, which sits on solid white. */
+  background: var(--c-white);
+  box-shadow: 0 1px 0 rgba(27, 28, 26, 0.08);
+}
+
+.nav__inner {
+  /* Figma: 56px-tall bar sitting 33px below the top of the page */
+  height: 56px;
+  margin-block-start: 33px;
+  margin-block-end: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-24);
+}
+
+.nav__logo img {
+  height: 56px; /* Figma logo is 214x56 */
+  width: auto;
+  object-fit: contain;
+}
+
+.nav--overlay .nav__logo img {
+  filter: brightness(0) invert(1);
+}
+
+/* ---------- Links ---------- */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  justify-content: center;
+  /* Figma: the link group sits in a 406x52 pill at #ffffff/20%, radius 99 */
+  height: 52px;
+  padding-inline: var(--s-10);
+  border-radius: var(--r-pill);
+  background: var(--c-teal-wash);
+  margin-inline: auto;
+}
+
+.nav--overlay .nav__links {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav__link {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: 24px;
+  color: var(--c-ink);
+  padding: var(--s-10) var(--s-12);
+  border-radius: var(--r-8);
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nav--overlay .nav__link {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.nav__link:hover {
+  color: var(--c-teal-900);
+  background: var(--c-teal-wash);
+}
+
+.nav--overlay .nav__link:hover {
+  color: var(--c-white);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav__link.is-active {
+  color: var(--c-teal-900);
+  font-weight: var(--fw-semibold);
+}
+
+.nav--overlay .nav__link.is-active {
+  color: var(--c-teal-400);
+}
+
+/* ---------- Actions ---------- */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-12);
+}
+
+.nav__locale {
+  position: relative;
+}
+
+.nav__locale-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-6);
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+  padding: var(--s-8) var(--s-10);
+  border-radius: var(--r-8);
+}
+
+.nav--overlay .nav__locale-btn {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.nav__locale-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.nav__locale-btn svg.is-flipped {
+  transform: rotate(180deg);
+}
+
+.nav__locale-menu {
+  position: absolute;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 220px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border-cool);
+  border-radius: var(--r-12);
+  box-shadow: var(--sh-lg);
+  padding: var(--s-6);
+  z-index: 10;
+}
+
+.nav__locale-menu button {
+  display: block;
+  width: 100%;
+  text-align: start;
+  padding: var(--s-10) var(--s-12);
+  border-radius: var(--r-8);
+  font-size: var(--fs-sm);
+  color: var(--c-text);
+}
+
+.nav__locale-menu button:hover {
+  background: var(--c-surface-warm);
+}
+
+.nav__locale-menu button.is-active {
+  color: var(--c-teal-900);
+  font-weight: var(--fw-semibold);
+  background: var(--c-teal-wash);
+}
+
+/* Plain text link — the Figma navbar has no filled CTA pill */
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding-inline: var(--s-12);
+  border-radius: var(--r-8);
+  background: transparent;
+  color: var(--c-ink);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nav__cta {
+  text-decoration: underline; /* Figma: textDecoration UNDERLINE */
+  text-underline-offset: 4px;
+}
+
+.nav__cta:hover {
+  color: var(--c-teal-900);
+  background: var(--c-teal-wash);
+}
+
+.nav--overlay .nav__cta {
+  color: var(--c-white);
+}
+
+.nav--overlay .nav__cta:hover {
+  color: var(--c-white);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav__burger {
+  display: none;
+  color: var(--c-ink);
+  padding: var(--s-8);
+}
+
+.nav--overlay .nav__burger {
+  color: var(--c-white);
+}
+
+/* ---------- Mobile drawer ---------- */
+.nav__drawer {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: min(86vw, 340px);
+  background: var(--c-white);
+  /* margin-inline-end is direction-aware, so this slides correctly in RTL and LTR */
+  margin-inline-end: calc(-1 * min(86vw, 340px));
+  transition: margin-inline-end 0.28s ease, visibility 0.28s;
+  visibility: hidden;
+  box-shadow: 0 0 40px rgba(20, 24, 25, 0.18);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-20);
+}
+
+.nav__drawer.is-open {
+  margin-inline-end: 0;
+  visibility: visible;
+}
+
+.nav__drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--s-20);
+  border-block-end: 1px solid var(--c-border-cool);
+}
+
+.nav__drawer-logo {
+  height: 30px;
+  width: auto;
+}
+
+.nav__drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding-block: var(--s-20);
+}
+
+.nav__drawer-links a {
+  padding: var(--s-12);
+  border-radius: var(--r-8);
+  font-size: var(--fs-lead);
+  color: var(--c-ink);
+}
+
+.nav__drawer-links a.is-active {
+  background: var(--c-teal-wash);
+  color: var(--c-teal-900);
+  font-weight: var(--fw-semibold);
+}
+
+.nav__drawer-foot {
+  margin-block-start: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  padding-block-start: var(--s-20);
+  border-block-start: 1px solid var(--c-border-cool);
+}
+
+.nav__drawer-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  height: 48px;
+  border-radius: var(--r-pill);
+  background: var(--c-teal-900);
+  color: var(--c-white);
+  font-weight: var(--fw-medium);
+  direction: ltr;
+}
+
+.nav__drawer-locale {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--c-text-soft);
+}
+
+.nav__scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 25, 0.5);
+  z-index: 70;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__burger {
+    display: inline-flex;
+  }
+  .nav__locale {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav__inner {
+    height: 48px;
+    margin-block-start: 16px;
+    margin-block-end: 12px;
+  }
+  .nav__logo img {
+    height: 40px;
+  }
+  .nav__cta {
+    display: none;
+  }
+}
+
+.nav__drawer-langs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+.nav__drawer-lang {
+  padding: var(--s-10);
+  border-radius: var(--r-8);
+  font-size: var(--fs-sm);
+  color: var(--c-text-soft);
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.nav__drawer-lang.is-active {
+  color: var(--c-teal-900);
+  font-weight: var(--fw-semibold);
+  background: var(--c-teal-wash);
+  border-color: var(--c-teal-400);
+}

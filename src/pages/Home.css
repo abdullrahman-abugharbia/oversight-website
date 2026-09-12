@@ -1,0 +1,698 @@
+/* ---------------- Hero ---------------- */
+.hero {
+  position: relative;
+  /*
+   * Figma draws this frame 1440x746. A fixed height means the hero stops
+   * wherever 746px lands and the next section pokes into view, so the screen
+   * shows two sections at once — worse the smaller the design is scaled.
+   * Fill the viewport instead and let one section own the screen.
+   *
+   * dvh, not vh: on mobile, vh is the viewport WITHOUT the browser's collapsing
+   * toolbars, so a 100vh hero is taller than what you can actually see.
+   * The plain vh line above it is the fallback for browsers without dvh.
+   */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--c-ink);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(10, 14, 16, 0.88) 0%,
+    rgba(10, 14, 16, 0.6) 42%,
+    rgba(10, 14, 16, 0.15) 100%
+  );
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  /* Figma sits the block 134px from the top; mirrored on the bottom so that
+     `align-items: center` centres the CONTENT rather than the padding box. */
+  padding-block: 134px;
+  padding-inline: 88px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero__content {
+  width: 542px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-bold);
+  line-height: 96px; /* Figma: 64px type on a 96px line */
+  color: var(--c-white);
+  margin: 0;
+  width: 100%;
+}
+
+.hero__accent {
+  color: var(--c-teal-400);
+}
+
+.hero__body {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-white);
+  margin: 0;
+  width: 477px;
+  max-width: 100%;
+  border-inline-end: 3px solid var(--c-teal-400);
+  padding-inline-end: var(--s-20);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+/* ---------------- About block ---------------- */
+.about-block {
+  background: var(--bg-about);
+}
+
+.about-block__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--s-64);
+  align-items: start;
+}
+
+.about-block__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.about-block__title {
+  font-size: var(--fs-d3);
+  font-weight: var(--fw-regular);
+  line-height: 1.25;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.about-block__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-20);
+}
+
+.about-block__copy p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: 30px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.about-block__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  align-self: flex-start;
+  font-weight: var(--fw-medium);
+  color: var(--c-white);
+  padding: var(--s-10) var(--s-20);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--r-8);
+  transition: all 0.18s ease;
+}
+
+.about-block__more:hover {
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+/* ---------------- Stats ---------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-48);
+  margin-block-start: var(--s-80);
+  padding-block-start: var(--s-48);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+}
+
+.stats__value {
+  font-size: 70px; /* Figma: 70px / 500 */
+  font-weight: var(--fw-medium);
+  line-height: 1.1;
+  color: var(--c-white);
+}
+
+.stats__label {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: 26px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+/* ---------------- Diagnostic (Figma: on #ffffff) ---------------- */
+.diag-section,
+.services-detail-section,
+.faq-section {
+  background: var(--c-white);
+}
+
+.diag-wrap {
+  margin-block-start: var(--s-56);
+}
+
+/* ---------------- Steps (Figma: section on #010101) ---------------- */
+.steps-section {
+  background: var(--bg-steps);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-24);
+  margin-block-start: var(--s-56);
+}
+
+.steps__card {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-16);
+  padding: var(--s-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.steps__card:hover {
+  border-color: var(--c-teal-800);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.steps__num {
+  font-size: 68px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--c-teal-800);
+}
+
+/* Figma highlights the final step number in cyan */
+.steps__card:last-child .steps__num {
+  color: var(--c-cyan);
+}
+
+.steps__title {
+  font-size: 23px;
+  font-weight: var(--fw-bold);
+  color: var(--c-white);
+  margin: 0;
+}
+
+.steps__body {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text-muted);
+  margin: 0;
+}
+
+.steps__cta {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--s-48);
+}
+
+/* ---------------- Detailed services ---------------- */
+.srv-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-80);
+  margin-block-start: var(--s-64);
+}
+
+.srv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-56);
+  align-items: center;
+}
+
+.srv--flip .srv__media {
+  order: 2;
+}
+
+.srv__media {
+  border-radius: var(--r-24);
+  overflow: hidden;
+  aspect-ratio: 674 / 506;
+  background: var(--c-surface-sunk);
+}
+
+.srv__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.srv__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.srv__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-16);
+}
+
+.srv__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  letter-spacing: 0.08em;
+  color: var(--c-grey-737);
+  text-transform: uppercase;
+}
+
+.srv__num {
+  font-size: 60px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--c-grey-737);
+}
+
+.srv__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--c-ink-111);
+  margin: 0;
+}
+
+.srv__lead {
+  font-size: var(--fs-body);
+  line-height: 28px;
+  color: var(--c-grey-737);
+  margin: 0;
+}
+
+.srv__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  margin-block-start: var(--s-8);
+}
+
+.srv__bullets li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding-inline-start: var(--s-16);
+  border-inline-start: 2px solid var(--c-teal-400);
+}
+
+.srv__bullets strong {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-ink-111);
+}
+
+.srv__bullets span {
+  font-size: var(--fs-2xs);
+  line-height: 20px;
+  color: var(--c-grey-737);
+}
+
+.srv__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-teal-900);
+  margin-block-start: var(--s-8);
+  transition: gap 0.2s ease;
+}
+
+.srv__link:hover {
+  gap: var(--s-14);
+}
+
+/* ---------------- Thermal demo (Figma: on #121316) ---------------- */
+.demo-section {
+  background: var(--bg-demo);
+}
+
+.demo-wrap {
+  margin-block-start: var(--s-56);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-32);
+}
+
+.demo__note {
+  font-size: var(--fs-lead);
+  line-height: 30px;
+  color: var(--c-border-cool);
+  margin: 0;
+  text-align: center;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+/* ---------------- NDT lab ---------------- */
+.section--dark.lab {
+  background: var(--bg-lab); /* Figma #121413 */
+}
+
+.lab__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.06em;
+  color: var(--c-teal-400);
+}
+
+.lab__title {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+  color: var(--c-white);
+  margin: var(--s-16) 0 0;
+  max-width: 900px;
+}
+
+.lab__sub {
+  font-size: var(--fs-lead);
+  line-height: 30px;
+  color: rgba(255, 255, 255, 0.66);
+  margin: var(--s-16) 0 0;
+  max-width: 760px;
+}
+
+.lab__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-24);
+  margin-block-start: var(--s-56);
+}
+
+.dev {
+  background: #131315;
+  border: 1px solid var(--c-teal-400);
+  border-radius: var(--r-4);
+  padding: var(--s-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.dev:hover {
+  border-color: var(--c-teal-400);
+  background: rgba(172, 238, 243, 0.08);
+}
+
+.dev__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  color: var(--c-teal-400);
+  letter-spacing: 0.04em;
+}
+
+.dev__media {
+  border-radius: var(--r-12);
+  overflow: hidden;
+  aspect-ratio: 308 / 192;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dev__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev__name {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-regular);
+  color: var(--c-white);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dev__body {
+  font-size: var(--fs-sm);
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  flex: 1;
+}
+
+.dev__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--c-green);
+  letter-spacing: 0.04em;
+  padding-block-start: var(--s-12);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dev__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 0 3px rgba(0, 181, 122, 0.2);
+}
+
+.testimonials-section {
+  background: var(--bg-testimonials);
+}
+
+.map-cta {
+  background: var(--bg-mapcta);
+}
+
+.map-cta__title {
+  color: var(--c-white);
+}
+
+.map-cta__text {
+  color: var(--c-border-cool);
+}
+
+/* ---------------- Testimonials / FAQ wrappers ---------------- */
+.tst-wrap,
+.faq-wrap {
+  margin-block-start: var(--s-56);
+}
+
+/* ---------------- Map CTA ---------------- */
+.map-cta__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-64);
+  align-items: center;
+}
+
+/* Figma "Map-Placeholder": 696x360 at x=80 (the inline-end side in RTL),
+   r=20 with a white hairline. */
+.map-cta__map {
+  display: block;
+  position: relative;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--c-white);
+  background: #121316;
+  cursor: pointer;
+}
+
+/* the artwork lifts slightly on hover so the plate reads as clickable */
+.map-cta__map img {
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.map-cta__map:hover img,
+.map-cta__map:focus-visible img {
+  transform: scale(1.03);
+  filter: brightness(1.12);
+}
+
+.map-cta__map:focus-visible {
+  outline: 2px solid #46a39e;
+  outline-offset: 3px;
+}
+
+.map-cta__map:hover .map-cta__badge {
+  background: #46a39e;
+  color: #0c0c10;
+}
+
+.map-cta__map:hover .map-cta__badge svg {
+  color: #0c0c10;
+}
+
+.map-cta__map img {
+  width: 100%;
+  aspect-ratio: 696 / 360;
+  object-fit: cover;
+}
+
+/* Figma "Location-Badge": 314x41 pinned to the top corner, #121316 on #46a39e, r=12 */
+.map-cta__badge {
+  position: absolute;
+  inset-block-start: var(--s-16);
+  inset-inline-start: var(--s-16);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  background: #121316;
+  border: 1px solid #46a39e;
+  border-radius: var(--r-12);
+  padding: var(--s-10) var(--s-16);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-white);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.map-cta__badge svg {
+  color: #46a39e;
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+.map-cta__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-20);
+}
+
+.map-cta__title {
+  font-size: var(--fs-h6);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.map-cta__text {
+  font-size: var(--fs-body);
+  line-height: 28px;
+  color: var(--c-text);
+  margin: 0;
+}
+
+.map-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-16);
+  margin-block-start: var(--s-8);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1200px) {
+  .lab__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 620px;
+  }
+  .hero__title {
+    font-size: 44px;
+  }
+  .about-block__grid,
+  .map-cta__grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-32);
+  }
+  .about-block__title {
+    font-size: var(--fs-h5);
+  }
+  .stats {
+    gap: var(--s-32);
+  }
+  .stats__value {
+    font-size: 48px;
+  }
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .srv,
+  .srv--flip .srv__media {
+    grid-template-columns: 1fr;
+    order: 0;
+  }
+  .srv {
+    gap: var(--s-24);
+  }
+  .lab__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lab__title {
+    font-size: var(--fs-h5);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__inner {
+    padding-block: 120px var(--s-64);
+  }
+  .hero__title {
+    font-size: 34px;
+  }
+  .hero__actions .btn {
+    width: 100%;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+  }
+  .lab__grid {
+    grid-template-columns: 1fr;
+  }
+  .map-cta__title {
+    font-size: 26px;
+  }
+}

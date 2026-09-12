@@ -1,0 +1,144 @@
+.ba {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-24);
+}
+
+.ba__frame {
+  position: relative;
+  border-radius: var(--r-24);
+  overflow: hidden;
+  aspect-ratio: 1000 / 500;
+  background: var(--c-ink);
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+}
+
+.ba__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.ba__overlay {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  will-change: width;
+}
+
+.ba__overlay .ba__img {
+  /* keep the clipped image aligned to the frame, not the clip box */
+  inset-inline-start: 0;
+  max-width: none;
+}
+
+.ba__chip {
+  position: absolute;
+  inset-block-start: var(--s-20);
+  padding: var(--s-8) var(--s-16);
+  border-radius: var(--r-pill);
+  background: rgba(20, 24, 25, 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--c-white);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ba__chip--start {
+  inset-inline-start: var(--s-20);
+}
+
+.ba__chip--end {
+  inset-inline-end: var(--s-20);
+}
+
+.ba__handle {
+  position: absolute;
+  inset-block: 0;
+  width: 3px;
+  background: var(--c-white);
+  transform: translateX(50%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+[dir='ltr'] .ba__handle {
+  transform: translateX(-50%);
+}
+
+.ba__grip {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c-white);
+  color: var(--c-teal-900);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--sh-md);
+}
+
+[dir='ltr'] .ba__grip {
+  transform: translate(-50%, -50%);
+}
+
+.ba__range {
+  position: absolute;
+  inset-block-end: var(--s-12);
+  inset-inline: var(--s-24);
+  width: calc(100% - 48px);
+  opacity: 0;
+  height: 32px;
+  z-index: 5;
+  cursor: ew-resize;
+}
+
+.ba__range:focus-visible {
+  opacity: 1;
+}
+
+.ba__captions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-32);
+}
+
+.ba__caption {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  line-height: 26px;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .ba__frame {
+    aspect-ratio: 4 / 3;
+  }
+  .ba__captions {
+    grid-template-columns: 1fr;
+    gap: var(--s-16);
+  }
+  .ba__chip {
+    font-size: var(--fs-2xs);
+    inset-block-start: var(--s-12);
+  }
+  .ba__chip--start {
+    inset-inline-start: var(--s-12);
+  }
+  .ba__chip--end {
+    inset-inline-end: var(--s-12);
+  }
+}
