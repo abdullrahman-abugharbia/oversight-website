@@ -44,16 +44,16 @@ jobs:
       # "we got your message", and sending nothing. Fail loudly instead.
       - name: Require the contact-form key
         env:
-          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY || vars.VITE_WEB3FORMS_KEY }}
         run: |
           if [ -z "$VITE_WEB3FORMS_KEY" ]; then
-            echo "::error::VITE_WEB3FORMS_KEY is not set. Add it under Settings -> Secrets and variables -> Actions -> New repository secret. Without it the deployed contact form would accept enquiries and discard them."
+            echo "::error::VITE_WEB3FORMS_KEY is not set. Add it at Settings -> Secrets and variables -> ACTIONS, as a repository secret or a repository variable. An Environment of that name does not work: environments are deployment targets, and this job does not declare one. Without the key the deployed contact form would accept enquiries and discard them."
             exit 1
           fi
 
       - name: Build
         env:
-          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY || vars.VITE_WEB3FORMS_KEY }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
