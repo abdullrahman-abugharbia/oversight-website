@@ -1,0 +1,239 @@
+@import './tokens.css';
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * THE SCALE DIAL FOR THE WHOLE DESIGN.
+ *
+ * Every length in src/ is written in Figma pixels and converted to rem by
+ * postcss-pxtorem (see postcss.config.js), so this single font-size decides
+ * how large the entire design renders.
+ *
+ * The design needs 1600px of viewport to show its 1440px frame with margins.
+ * 1vw hits exactly that: it yields 12.8px at a 1280px viewport (80% — what a
+ * Windows box at 125% display scaling actually gets) and 16px at 1600px
+ * (100% — Figma 1:1). clamp() stops it running away in either direction.
+ *
+ *   1280px viewport → 12.8px root →  80%
+ *   1440px viewport → 14.4px root →  90%
+ *   1600px+         → 16px   root → 100%  (pixel-exact to Figma)
+ *
+ * Written in rem, not px, so it multiplies the reader's own browser font-size
+ * preference instead of overriding it. On the root element rem resolves
+ * against that default, which is what makes this work.
+ */
+html {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/*
+ * Below the tablet breakpoint the layouts are already single-column and were
+ * drawn for small screens — shrinking them further would push body copy under
+ * 13px. Hand the full size back.
+ */
+@media (max-width: 1024px) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text);
+  background: var(--c-white);
+  /* direction comes from <html dir>, managed by LanguageProvider.
+     text-align: start follows it automatically in both RTL and LTR. */
+  text-align: start;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--c-ink);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-teal-600);
+  outline-offset: 2px;
+  border-radius: var(--r-4);
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  width: 100%;
+  /* max-width includes the padding, so add it: Figma's content widths are
+     1360 / 1280 / 1245 measured INSIDE a 40px page margin. */
+  max-width: calc(var(--container) + 80px);
+  margin-inline: auto;
+  padding-inline: 40px;
+}
+
+.container--narrow {
+  max-width: calc(var(--container-narrow) + 80px);
+}
+
+.container--tight {
+  max-width: calc(var(--container-tight) + 80px);
+}
+
+.section {
+  padding-block: var(--s-100);
+}
+
+.section--warm {
+  background: var(--c-surface-warm);
+}
+
+.section--dark {
+  background: var(--c-ink);
+  color: var(--c-white);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--c-white);
+}
+
+/* ---------- Shared type ---------- */
+.eyebrow {
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-regular);
+  color: var(--c-teal-900);
+  line-height: 1.4;
+}
+
+.section-title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  color: var(--c-ink);
+  line-height: 1.3;
+}
+
+.section-sub {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-regular);
+  color: var(--c-text-soft);
+  line-height: 30px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .container {
+    padding-inline: 24px;
+  }
+  .section {
+    padding-block: var(--s-80);
+  }
+  .section-title {
+    font-size: var(--fs-h5);
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 16px;
+  }
+  .section {
+    padding-block: var(--s-56);
+  }
+  .section-title {
+    font-size: 28px;
+  }
+  .section-sub {
+    font-size: var(--fs-body);
+    line-height: 26px;
+  }
+}

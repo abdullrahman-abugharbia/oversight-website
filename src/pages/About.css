@@ -1,0 +1,935 @@
+/* ============ Shared inner-page hero (Services + Contact) ============
+   Figma "Frame 167": 1440x566 on white. Title 772x192 at y=174 (60px/96px,
+   #000000) with the swoosh 97px down. Body 802x88 at y=401 (30px/44px).
+   Two 169px #2a6e73 circles at the far edges under a 354px layer blur.
+   ==================================================================== */
+.page-hero {
+  position: relative;
+  height: 566px;
+  display: flex;
+  align-items: flex-start;
+  background: var(--c-white);
+  overflow: hidden;
+}
+
+/* Figma "Ellipse 31/32": solid #2a6e73 under LAYER_BLUR 354 */
+.page-hero__glow {
+  position: absolute;
+  inset-block-start: 200px;
+  width: 169px;
+  height: 169px;
+  border-radius: 50%;
+  background: var(--c-teal-800);
+  filter: blur(120px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.page-hero__glow--a {
+  inset-inline-end: 55px;
+}
+
+.page-hero__glow--b {
+  inset-inline-start: 55px;
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-block-start: 174px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 35px;
+}
+
+.page-hero__title {
+  position: relative;
+  width: 772px;
+  max-width: 100%;
+  font-size: 60px;
+  font-weight: var(--fw-bold);
+  line-height: 96px;
+  color: var(--c-black);
+  margin: 0;
+}
+
+/* Same placement as the Work hero: 97px down, between the title lines */
+.page-hero__swoosh {
+  position: absolute;
+  inset-block-start: 97px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 248px;
+  max-width: 80%;
+  color: var(--c-teal-600);
+}
+
+.page-hero__body {
+  font-size: 30px;
+  font-weight: var(--fw-medium);
+  line-height: 44px;
+  color: var(--c-black);
+  margin: 0;
+  width: 802px;
+  max-width: 100%;
+}
+
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-16);
+  margin-block-start: var(--s-8);
+}
+
+@media (max-width: 1024px) {
+  .page-hero {
+    height: auto;
+    padding-block-end: var(--s-56);
+  }
+  .page-hero__inner {
+    padding-block-start: 140px;
+    gap: var(--s-24);
+  }
+  .page-hero__title {
+    width: 100%;
+    font-size: 40px;
+    line-height: 1.35;
+  }
+  .page-hero__swoosh {
+    position: static;
+    transform: none;
+    display: block;
+    margin: var(--s-12) auto 0;
+  }
+  .page-hero__body {
+    width: 100%;
+    font-size: var(--fs-lead);
+    line-height: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-hero__title {
+    font-size: 30px;
+  }
+}
+
+/* ---------------- Pillars ---------------- */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-32);
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  padding-inline-start: var(--s-24);
+  border-inline-start: 2px solid var(--c-teal-400);
+}
+
+.pillar__num {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--c-teal-900);
+  font-family: var(--font-mono);
+}
+
+.pillar__title {
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-bold);
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.pillar__body {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+  color: var(--c-text-soft);
+  margin: 0;
+}
+
+/* ---------------- Oath ---------------- */
+.oath {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-32);
+  margin-block-start: var(--s-56);
+}
+
+.oath__card {
+  background: var(--c-white);
+  border: 1px solid var(--c-border-cool);
+  border-radius: var(--r-24);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.oath__card:hover {
+  box-shadow: var(--sh-card);
+  border-color: var(--c-teal-400);
+}
+
+.oath__card--wide {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+}
+
+.oath__card--wide .oath__media {
+  flex: 0 0 46%;
+  aspect-ratio: 575 / 300;
+}
+
+.oath__media {
+  aspect-ratio: 562 / 256;
+  background: var(--c-surface-sunk);
+  overflow: hidden;
+}
+
+.oath__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.oath__body {
+  padding: var(--s-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+}
+
+.oath__title {
+  font-size: var(--fs-h6);
+  font-weight: var(--fw-semibold);
+  line-height: 1.35;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.oath__text {
+  font-size: var(--fs-sm);
+  line-height: 24px;
+  color: var(--c-text-soft);
+  margin: 0;
+}
+
+.oath__card--wide .oath__text {
+  font-size: var(--fs-lead);
+  line-height: 30px;
+}
+
+/* ---------------- Why us ----------------
+   Figma: 1440x1066 on #ffffff. Three 428px gradient cards, 16px radius,
+   22px gutters. The centre card is taller (772 vs 699) and raised by 73px. */
+.why {
+  background: var(--c-white);
+}
+
+.why__title {
+  font-size: 68px; /* Figma: 68px / 700 */
+  font-weight: var(--fw-bold);
+  line-height: 53px;
+  color: var(--c-ink);
+  margin: 0;
+  text-align: center;
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1328px;
+  margin-inline: auto;
+  margin-block-start: 128px;
+  align-items: start;
+}
+
+.why__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  min-height: 699px;
+  padding: var(--s-32);
+  border-radius: var(--r-16);
+  /* Figma gradient handles run top-left → bottom-right */
+  background: linear-gradient(
+    135deg,
+    #117788 0%,
+    #086272 12.1%,
+    #138193 78.9%,
+    #00a8c4 100%
+  );
+}
+
+/* Centre card sits higher and runs taller */
+.why__card--featured {
+  min-height: 772px;
+  margin-block-start: -73px;
+}
+
+.why__card-title {
+  font-size: 44px; /* Figma: 44px / 700 */
+  font-weight: var(--fw-bold);
+  line-height: 53px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.why__card-body {
+  font-size: var(--fs-base-lg); /* 24px / 500 */
+  font-weight: var(--fw-medium);
+  line-height: 43px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.why__card-media {
+  margin-block-start: auto;
+  border-radius: var(--r-16);
+  overflow: hidden;
+  aspect-ratio: 364 / 303;
+}
+
+.why__card--featured .why__card-media {
+  border-radius: var(--r-8);
+  aspect-ratio: 1 / 1;
+  background: var(--c-teal-600);
+}
+
+.why__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------- Sectors ----------------
+   Figma: section #0d1111. 2x2 grid of 644x402 image cards,
+   24px gutters, #1b1c1c base, #3f4849 border, r=2. ---------- */
+.sectors-section {
+  background: #0d1111;
+}
+
+.sectors {
+  display: grid;
+  grid-template-columns: repeat(2, 644px);
+  justify-content: center;
+  gap: 24px;
+  margin-block-start: 56px;
+}
+
+.sector {
+  position: relative;
+  height: 402px;
+  overflow: hidden;
+  background: #1b1c1c;
+  border: 1px solid #3f4849;
+  border-radius: var(--r-2);
+}
+
+.sector__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sector__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(12, 14, 14, 0.95) 0%,
+    rgba(12, 14, 14, 0.72) 45%,
+    rgba(12, 14, 14, 0.35) 100%
+  );
+}
+
+.sector__inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 33px;
+}
+
+.sector__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-16);
+}
+
+.sector__icon {
+  color: var(--c-teal-400); /* Figma icon fill #90d1d7 */
+  line-height: 0;
+}
+
+.sector__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-4);
+  text-align: end;
+}
+
+.sector__num {
+  font-size: var(--fs-h4); /* 40px / 600 */
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  color: var(--c-white);
+}
+
+.sector__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  color: var(--c-teal-400);
+}
+
+.sector__foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+}
+
+.sector__title {
+  font-size: var(--fs-h6); /* 32px / 600 */
+  font-weight: var(--fw-semibold);
+  color: var(--c-white);
+  margin: 0;
+}
+
+.sector__body {
+  font-size: var(--fs-lead);
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+}
+
+.sector__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  align-self: flex-start;
+  padding-block-start: var(--s-12);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.16);
+  width: 100%;
+  font-size: var(--fs-2xs);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sector__tag svg {
+  color: var(--c-teal-400);
+  flex-shrink: 0;
+}
+
+/* ---------------- Partners ---------------- */
+.partners-section {
+  background: var(--c-white);
+}
+
+.partners-section .sec-head__title {
+  color: #001618; /* Figma */
+}
+
+.partners {
+  margin-block-start: var(--s-48);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-40);
+}
+
+/* Figma "Nav - Partners Filter": a 706x45 list with a #d1d5db bottom rule */
+.partners__filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-24);
+  border-block-end: 1px solid #d1d5db;
+  max-width: 706px;
+  margin-inline: auto;
+}
+
+.partners__filter {
+  font-size: var(--fs-h6);
+  font-weight: var(--fw-regular);
+  color: var(--c-text-soft);
+  padding-block-end: var(--s-8);
+  border-block-end: 2px solid transparent;
+  transition: all 0.18s ease;
+}
+
+.partners__filter.is-active {
+  color: var(--c-ink);
+  font-weight: var(--fw-medium);
+  border-block-end-color: var(--c-teal-900);
+}
+
+/* Figma "Logo Carousel Container": 1216x96 rail flanked by chevrons */
+.partners__carousel {
+  display: flex;
+  align-items: center;
+  gap: var(--s-16);
+}
+
+.partners__arrow {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--c-text-soft);
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.partners__arrow:hover {
+  color: var(--c-teal-900);
+  background: var(--c-teal-wash);
+}
+
+.partners__track {
+  flex: 1;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  gap: var(--s-40);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.partners__track::-webkit-scrollbar {
+  display: none;
+}
+
+.partner {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  min-width: 160px;
+  height: 96px;
+}
+
+.partner img {
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.partner:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.partners__empty {
+  text-align: center;
+  color: var(--c-text-soft);
+}
+
+/* ---------------- CTA band ---------------- */
+/* Figma "Section - 7. FINAL": 1440x447 on #0d1111 with a #cfc4c5 hairline */
+/* Figma "Section - 7. FINAL": 1440x447 image under a gradient on #0d1111 */
+.cta-band {
+  position: relative;
+  background: #0d1111;
+  border-block-start: 1px solid var(--c-border);
+  border-block-end: 1px solid var(--c-border);
+  min-height: 447px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--c-white);
+}
+
+.cta-band__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cta-band__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to var(--cta-dir, left),
+    rgba(13, 17, 17, 0.96) 0%,
+    rgba(13, 17, 17, 0.82) 45%,
+    rgba(13, 17, 17, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+[dir='rtl'] .cta-band__scrim {
+  --cta-dir: right;
+}
+
+/* Figma: the content block sits at x=64, 582 wide — the inline-end side */
+.cta-band__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: end;
+  gap: var(--s-20);
+  max-width: 582px;
+  margin-inline-start: auto;
+}
+
+.cta-band__title {
+  font-size: var(--fs-d3);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  color: var(--c-white);
+  margin: 0;
+  white-space: pre-line;
+}
+
+.cta-band__body {
+  font-size: var(--fs-body);
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  max-width: 680px;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-16);
+  margin-block-start: var(--s-8);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1024px) {
+  .page-hero {
+    padding-block: 140px var(--s-56);
+  }
+  .page-hero__title {
+    font-size: 40px;
+  }
+  .page-hero__body {
+    font-size: var(--fs-lead);
+  }
+  .pillars {
+    grid-template-columns: 1fr;
+    gap: var(--s-24);
+  }
+  .oath,
+  .why__grid {
+    grid-template-columns: 1fr;
+  }
+  .oath__card--wide {
+    flex-direction: column;
+  }
+  .oath__card--wide .oath__media {
+    flex: none;
+    width: 100%;
+  }
+  .why__title {
+    font-size: 40px;
+    line-height: 1.25;
+  }
+  .why__grid {
+    margin-block-start: var(--s-56);
+  }
+  .why__card,
+  .why__card--featured {
+    min-height: 0;
+    margin-block-start: 0;
+  }
+  .why__card-title {
+    font-size: 30px;
+    line-height: 1.25;
+  }
+  .why__card-body {
+    font-size: var(--fs-body);
+    line-height: 28px;
+  }
+  .sectors {
+    grid-template-columns: minmax(0, 644px);
+  }
+  .sector {
+    height: auto;
+    min-height: 340px;
+  }
+  .cta-band__inner {
+    max-width: none;
+    margin-inline-start: 0;
+    align-items: flex-start;
+  }
+  .partners__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cta-band__title {
+    font-size: var(--fs-h5);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-hero__title {
+    font-size: 30px;
+  }
+  .page-hero__actions .btn {
+    width: 100%;
+  }
+  .partners__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .partners__filter {
+    font-size: var(--fs-lead);
+  }
+  .cta-band__title {
+    font-size: 26px;
+  }
+  .cta-band__actions .btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================================
+   About hero — Figma "Hero page" 1440x793, dark image with a
+   glassmorphism trust strip overlapping its lower third.
+   ===================================================================== */
+.about-hero {
+  position: relative;
+  /* Figma frame is 793px tall — see the note on .hero in Home.css for why a
+     fixed height leaves the next section peeking. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  /*
+   * Column, not the default row. Below 1200px .trust-strip drops to
+   * position:static and becomes a flex ITEM — in row direction it lined up
+   * beside the heading instead of stacking under it.
+   * justify-content then does the vertical centring (main axis is vertical).
+   */
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--c-ink);
+}
+
+.about-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(8, 12, 14, 0.9) 0%,
+    rgba(8, 12, 14, 0.66) 45%,
+    rgba(8, 12, 14, 0.2) 100%
+  );
+}
+
+.about-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  /* Bottom padding also reserves the band the .trust-strip cards occupy
+     (133px tall, 23px off the bottom), so centring keeps the text clear of
+     them instead of drifting down behind them. */
+  padding-block: 140px 190px;
+  padding-inline: 82px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.about-hero__content {
+  width: 747px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.about-hero__title {
+  font-size: 70px; /* Figma: 70px / 700 on a 96px line */
+  font-weight: var(--fw-bold);
+  line-height: 96px;
+  color: var(--c-white);
+  margin: 0;
+  width: 100%;
+}
+
+.about-hero__line {
+  display: block;
+}
+
+/* Figma colours the middle line #46a39e */
+.about-hero__accent {
+  color: #46a39e;
+}
+
+.about-hero__body {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-white);
+  margin: 0;
+  width: 614px;
+  max-width: 100%;
+  border-inline-end: 3px solid var(--c-teal-400);
+  padding-inline-end: var(--s-20);
+}
+
+.about-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+/* ---------- Glassmorphism trust strip ---------- */
+.trust-strip {
+  position: absolute;
+  inset-block-end: 23px; /* cards sit at y=619 in a 793px hero */
+  inset-inline: 0;
+  z-index: 3;
+  width: 100%;
+  max-width: 1152px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.trust-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-16);
+  min-height: 151px;
+  padding: var(--s-24);
+  /* Figma: #ffffff at 5%, 1px white border, 2px radius, 12px backdrop blur */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--c-white);
+  border-radius: var(--r-2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.trust-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+.trust-card__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  color: var(--c-teal-400);
+}
+
+.trust-card__title {
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-bold);
+  color: var(--c-white);
+  margin: 0;
+}
+
+.trust-card__body {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+}
+
+.trust-card__icon {
+  flex-shrink: 0;
+  color: var(--c-teal-400);
+}
+
+/* ---------- Oath section — Figma bg #faf9f5, teal heading ---------- */
+.oath-section {
+  background: #faf9f5;
+}
+
+.oath-section .sec-head__title {
+  color: var(--c-teal-800); /* #2a6e73 */
+  font-size: var(--fs-d1);
+}
+
+.oath-section .sec-head__sub {
+  color: #00373b;
+  font-size: 28px;
+  line-height: 53px;
+}
+
+.oath-section .oath__card {
+  border-color: #e5e7eb;
+  border-radius: var(--r-4);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+  .about-hero {
+    height: auto;
+    padding-block-end: var(--s-40);
+  }
+  .about-hero__inner {
+    padding-inline: 40px;
+    /* .trust-strip is static from here down, so the band reserved for it at
+       desktop sizes is no longer needed. */
+    padding-block: 140px var(--s-40);
+  }
+  .about-hero__title {
+    font-size: 46px;
+    line-height: 1.35;
+  }
+  .trust-strip {
+    position: static;
+    margin-block-start: var(--s-40);
+    padding-inline: 40px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .trust-strip {
+    grid-template-columns: 1fr;
+    gap: var(--s-16);
+  }
+  .about-hero__title {
+    font-size: 34px;
+  }
+  .about-hero__inner {
+    padding-inline: 24px;
+    padding-block-start: 120px;
+  }
+  .about-hero__actions .btn {
+    width: 100%;
+  }
+  .oath-section .sec-head__sub {
+    font-size: var(--fs-body);
+    line-height: 28px;
+  }
+}

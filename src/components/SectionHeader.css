@@ -1,0 +1,70 @@
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  max-width: 860px;
+}
+
+.sec-head--center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.sec-head--start {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.sec-head__eyebrow {
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-regular);
+  color: var(--c-teal-900);
+  line-height: 1.4;
+}
+
+.sec-head__title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  color: var(--c-ink-111); /* Figma section titles are #000000–#111111 */
+  margin: 0;
+}
+
+.sec-head__sub {
+  font-size: var(--fs-lead);
+  line-height: 30px;
+  color: var(--c-text-muted); /* #718096 */
+  margin: 0;
+}
+
+.sec-head--dark .sec-head__title {
+  color: var(--c-white);
+}
+
+.sec-head--dark .sec-head__sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sec-head--dark .sec-head__eyebrow {
+  color: var(--c-teal-400);
+}
+
+@media (max-width: 1024px) {
+  .sec-head__title {
+    font-size: var(--fs-h5);
+  }
+}
+
+@media (max-width: 640px) {
+  .sec-head__title {
+    font-size: 28px;
+  }
+  .sec-head__sub {
+    font-size: var(--fs-body);
+    line-height: 26px;
+  }
+  .sec-head__eyebrow {
+    font-size: var(--fs-lead);
+  }
+}

@@ -1,0 +1,354 @@
+@import './About.css';
+
+/* Figma: two equal 607px columns with a 50px gutter inside a 1264 container */
+.contact__grid.container--narrow {
+  max-width: calc(1264px + 80px);
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+/* ---------------- Channels ---------------- */
+/* Figma "Direct Channels": a single 607x981 white card, r=24, #cfc4c5 */
+.channels-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-24);
+  overflow: hidden;
+}
+
+.channel {
+  display: flex;
+  gap: var(--s-16);
+  padding: var(--s-32);
+  transition: background-color 0.2s ease;
+}
+
+/* hairline separators between channels, not four separate cards */
+.channel + .channel {
+  border-block-start: 1px solid var(--c-border-cool);
+}
+
+a.channel:hover {
+  background: var(--c-surface-warm);
+}
+
+/* Figma: a 542x368 blueprint drawing closes the channels card */
+.channels-card__media {
+  margin: auto var(--s-32) var(--s-32);
+  border-radius: var(--r-16);
+  overflow: hidden;
+  background: #e9e8e4;
+}
+
+.channels-card__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 542 / 368;
+  object-fit: cover;
+}
+
+.channel__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-12);
+  background: var(--c-teal-wash);
+  color: var(--c-teal-900);
+}
+
+.channel__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+.channel__label {
+  font-size: 21px;
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  line-height: 1.4;
+}
+
+.channel__value {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--c-teal-900);
+  direction: ltr;
+  text-align: start;
+}
+
+.channel__note {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text-soft);
+}
+
+/* ---------------- Form ---------------- */
+/* Figma "Lead Form": 607x995 white card, r=24, #cfc4c5 border + shadow */
+.form-card {
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-24);
+  padding: 49px;
+  box-shadow: var(--sh-card);
+}
+
+.form-card__title {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0 0 var(--s-12);
+}
+
+.form-card__sub {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text-soft);
+  margin: 0 0 var(--s-32);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-20);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-20);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+.field label {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: var(--s-12) var(--s-16);
+  border: 1px solid transparent;
+  border-radius: var(--r-8);
+  background: var(--c-surface-warm); /* Figma #f5f4f0 */
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  font-family: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 26px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--c-text-grey);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--c-teal-900);
+  box-shadow: 0 0 0 3px var(--c-teal-wash);
+}
+
+.field.has-error input,
+.field.has-error textarea {
+  border-color: #d9534f;
+}
+
+.field__error {
+  font-size: var(--fs-sm);
+  color: #d9534f;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--s-10);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-2);
+  accent-color: var(--c-teal-900);
+  cursor: pointer;
+}
+
+.form__submit {
+  width: 100%;
+  height: 56px;
+  padding-inline: var(--s-32);
+  border-radius: var(--r-8);
+  background: var(--c-teal-600); /* Figma #318391 */
+  color: var(--c-white);
+  font-size: 21px;
+  font-weight: var(--fw-semibold);
+  transition: background-color 0.18s ease, opacity 0.18s ease;
+}
+
+.form__submit:hover:not(:disabled) {
+  background: var(--c-teal-900);
+}
+
+.form__submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* ---------------- Success ---------------- */
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-12);
+  padding-block: var(--s-40);
+  color: var(--c-teal-900);
+}
+
+.form-success h3 {
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.form-success p {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text-soft);
+  margin: 0;
+  max-width: 380px;
+}
+
+.form-success__again {
+  margin-block-start: var(--s-8);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--c-teal-900);
+  text-decoration: underline;
+}
+
+/* ---------------- Map ---------------- */
+.contact-map {
+  margin: var(--s-48) 0 0;
+  border-radius: var(--r-24);
+  overflow: hidden;
+  border: 1px solid var(--c-border-cool);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1264 / 420;
+  border: 0;
+}
+
+.contact-map__link {
+  display: inline-block;
+  margin-block-start: var(--s-16);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--c-teal-800);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 1024px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-32);
+  }
+}
+
+@media (max-width: 640px) {
+  .form-card {
+    padding: var(--s-24);
+  }
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+  .channel {
+    padding: var(--s-16);
+  }
+  .channel__label {
+    font-size: var(--fs-lead);
+  }
+}
+
+
+/* Figma "Frame 47488": 1264x559 on #ffffff */
+.map-section {
+  background: var(--c-white);
+}
+
+/* ---------------- Send failure / demo-mode notices ---------------- */
+/* Loud enough that a failed send cannot be mistaken for a successful one. */
+.form__failed {
+  padding: var(--s-12) var(--s-16);
+  border-radius: var(--r-8);
+  border: 1px solid #d9534f;
+  background: #fdf2f2;
+  color: #a33;
+  font-size: var(--fs-sm);
+  line-height: 22px;
+}
+
+.form-success__mock {
+  margin-block-start: var(--s-8);
+  padding: var(--s-8) var(--s-12);
+  border-radius: var(--r-8);
+  background: var(--c-surface-warm);
+  color: var(--c-text-grey);
+  font-size: var(--fs-xs);
+  line-height: 20px;
+}
+
+/*
+ * Honeypot — hidden from people, reachable by bots that parse the DOM.
+ * Not `display:none`: some bots skip those, and a few skip `visibility` too.
+ *
+ * Parked with clip-path rather than the usual `left: -9999px`. This document
+ * is RTL, and in RTL a box pushed off the left edge extends the scrollable
+ * area instead of being discarded — `left:-9999px` gave the contact page a
+ * ~8000px horizontal scroll. Clipping occupies no space in any direction.
+ */
+.form__botcheck {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
+}

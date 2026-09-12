@@ -1,0 +1,605 @@
+@import './About.css';
+
+/* ================= Service explorer =================
+   Figma "Html → Body": 1280x1222 on #ffffff/#faf9f5.
+   Tabs are 76px pills (r=16) that wrap onto two rows, active
+   #318391 with white text. Panel is 466 info card + 662 diagram.
+   ==================================================== */
+.svc-explorer-section {
+  background: var(--c-white);
+}
+
+.svc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--s-16) var(--s-24);
+  max-width: 1152px;
+  margin-inline: auto;
+}
+
+.svc-tab {
+  height: 76px;
+  padding-inline: var(--s-16);
+  border-radius: var(--r-16);
+  font-size: var(--fs-base-lg); /* 24px */
+  font-weight: var(--fw-regular);
+  line-height: 44px;
+  color: #323232;
+  background: transparent;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.svc-tab:hover {
+  background: var(--c-surface-warm);
+}
+
+.svc-tab.is-active {
+  background: var(--c-teal-600); /* #318391 */
+  color: var(--c-white);
+  font-weight: var(--fw-medium);
+  box-shadow: none;
+}
+
+/* ---------- Panel ---------- */
+.svc-panel {
+  display: grid;
+  /* Figma: information column is 466 wide on the physical left, diagram on the
+     right. DOM order is diagram-then-info so RTL places them correctly. */
+  grid-template-columns: 1fr 466px;
+  gap: 88px;
+  align-items: start;
+  max-width: 1152px;
+  margin: 56px auto 0;
+  padding-block-start: 0;
+}
+
+/* Figma "Left Column (Information)": 466x859, #ffffff, #d9d9d4, r=2 */
+.svc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 33px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border-warm-2);
+  border-radius: var(--r-2);
+}
+
+/* Figma "Header Badge": 400x89, #1b1b1b, r=2 */
+.svc-info__badge {
+  display: grid;
+  place-items: center;
+  min-height: 89px;
+  padding: var(--s-16);
+  background: #1b1b1b;
+  border-radius: var(--r-2);
+  text-align: center;
+}
+
+.svc-info__badge h2 {
+  font-size: 21px; /* Figma: 21px / 600 */
+  font-weight: var(--fw-semibold);
+  line-height: 29px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.svc-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+/* Figma "HorizontalBorder": heading with a rule beneath it */
+.svc-block__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-8);
+  font-size: var(--fs-base-lg); /* 24px / 600 */
+  font-weight: var(--fw-semibold);
+  line-height: 29px;
+  color: var(--c-ink);
+  margin: 0;
+  padding-block-end: var(--s-8);
+  border-block-end: 1px solid var(--c-border-warm-2);
+}
+
+.svc-block__sub {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text-muted);
+}
+
+.svc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.svc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-10);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-text);
+}
+
+.svc-list svg {
+  flex-shrink: 0;
+  margin-block-start: 4px;
+  color: var(--c-teal-600);
+}
+
+/* Figma: four 94px white chip cards, r=2 */
+.svc-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-8);
+}
+
+.svc-chips li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  min-height: 85px;
+  padding: var(--s-8);
+  background: var(--c-white);
+  border: 1px solid var(--c-border-warm-2);
+  border-radius: var(--r-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  color: var(--c-ink);
+  text-align: center;
+}
+
+.svc-chips svg {
+  color: var(--c-teal-600);
+  flex-shrink: 0;
+}
+
+/* Figma "Button": 400x61, #318391, r=2 */
+.svc-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-10);
+  min-height: 61px;
+  padding-inline: var(--s-24);
+  background: var(--c-teal-600);
+  border-radius: var(--r-2);
+  color: var(--c-white);
+  font-size: var(--fs-base-lg);
+  font-weight: var(--fw-semibold);
+  transition: background-color 0.18s ease;
+}
+
+.svc-cta:hover {
+  background: var(--c-teal-800);
+}
+
+/* ---------- Building diagram with inspection hotspots ---------- */
+.svc-diagram {
+  position: relative;
+  margin: 0;
+  border-radius: var(--r-16);
+  overflow: hidden;
+  background: var(--c-surface-warm);
+  aspect-ratio: 666 / 434;
+}
+
+.svc-diagram img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Inspection hotspots ----------
+   Figma: each marker is a dashed outer ring (38px, or 55px when active) around
+   a filled inner circle (28px / 40px) with its own icon and palette.
+   The active marker also carries the 156x37 #060505 label chip, r=10. */
+.svc-hotspot {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px dashed var(--hs-dash);
+  background: transparent;
+  cursor: pointer;
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.svc-hotspot__dot {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--hs-fill);
+  border: 2px solid var(--hs-ring);
+  color: var(--c-white);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* Figma: the selected marker is larger and its ring is filled white */
+.svc-hotspot.is-active {
+  width: 55px;
+  height: 55px;
+  background: var(--c-white);
+  z-index: 2;
+}
+
+.svc-hotspot.is-active .svc-hotspot__dot {
+  width: 40px;
+  height: 40px;
+}
+
+.svc-hotspot:hover .svc-hotspot__dot {
+  filter: brightness(1.12);
+}
+
+.svc-hotspot__label {
+  position: absolute;
+  inset-inline-end: calc(100% + var(--s-12));
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  min-height: 37px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--s-16);
+  background: #060505;
+  border-radius: var(--r-10);
+  color: var(--c-white);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .svc-panel {
+    grid-template-columns: 1fr;
+    gap: var(--s-40);
+  }
+  .svc-info {
+    max-width: 560px;
+  }
+  .svc-tab {
+    height: 60px;
+    font-size: var(--fs-lead);
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 760px) {
+  /* The floating hotspot label overruns narrow screens, and the active tab
+     pill already names the service — drop it rather than clip it. */
+  .svc-hotspot__label {
+    display: none;
+  }
+  .svc-hotspot.is-active {
+    width: 44px;
+    height: 44px;
+  }
+  .svc-hotspot.is-active .svc-hotspot__dot {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .svc-tabs {
+    gap: var(--s-10);
+  }
+  .svc-tab {
+    height: auto;
+    padding: var(--s-12) var(--s-14);
+    font-size: var(--fs-sm);
+  }
+  .svc-chips {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .svc-info {
+    padding: var(--s-20);
+    gap: var(--s-24);
+  }
+}
+
+/* =================== Process ===================
+   Figma: 1440x1225 on #020a0c. Central 5px gradient spine with
+   four 460x157 cards alternating either side, r=24, 0.5px
+   gradient border. CTA pill 273x77, white, r=50, #318391 text.
+   ============================================== */
+.proc-section {
+  position: relative;
+  background: #020a0c;
+  overflow: hidden;
+  padding-block: 132px 100px;
+}
+
+/* Figma "Rectangle 53/54/55/56": large rectangles rotated -43deg with a
+   #318391 → transparent gradient, producing diagonal light bands. */
+.proc-section__glow {
+  position: absolute;
+  width: 1717px;
+  height: 1625px;
+  background: linear-gradient(
+    180deg,
+    rgba(49, 131, 145, 0.5) 0%,
+    rgba(15, 39, 43, 0) 62%
+  );
+  transform: rotate(-43deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.proc-section__glow--a {
+  inset-block-start: -289px;
+  left: -466px;
+}
+
+.proc-section__glow--b {
+  inset-block-start: 32px;
+  left: 1159px;
+  width: 1207px;
+  height: 1211px;
+  transform: rotate(-44deg);
+  opacity: 0.8;
+}
+
+.proc-section__scrim {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: 220px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.proc-timeline {
+  position: relative;
+  z-index: 1;
+}
+
+/* The rail wraps the list so the spine is exactly as tall as the steps
+   and never runs on past them into the CTA. */
+.proc-rail {
+  position: relative;
+}
+
+/* Figma "Line 3": 5px vertical gradient spine down the centre */
+.proc-spine {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(to bottom, #0f272b 3%, #001c21 48%, #0f272b 100%);
+}
+
+/* Figma stair-steps the cards: y = 195 / 366 / 523 / 694, i.e. each card gets
+   its OWN row and alternates sides. Without explicit grid-row, auto-placement
+   packs two cards per row and the layout becomes a 2x2 grid. */
+.proc {
+  display: grid;
+  grid-template-columns: 460px 460px;
+  justify-content: center;
+  column-gap: 169px;
+  row-gap: 9px; /* card 157 + 9 ≈ the 166px average pitch in Figma */
+}
+
+.proc__item:nth-child(1) { grid-row: 1; }
+.proc__item:nth-child(2) { grid-row: 2; }
+.proc__item:nth-child(3) { grid-row: 3; }
+.proc__item:nth-child(4) { grid-row: 4; }
+
+.proc__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Cards alternate around the spine; in RTL column 1 is the right-hand side */
+.proc__item--end {
+  grid-column: 1;
+}
+
+.proc__item--start {
+  grid-column: 2;
+}
+
+/* Figma "Frame 47481": 460x157, r=24, 0.5px gradient border */
+.proc__card {
+  width: 460px;
+  min-height: 157px;
+  padding: 26px 40px;
+  border-radius: var(--r-24);
+  border: 0.5px solid transparent;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 48, 52, 0.8) 0%,
+      rgba(5, 38, 41, 0.4) 50%,
+      rgba(8, 33, 35, 0.4) 75%,
+      rgba(9, 31, 33, 0.5) 88%,
+      rgba(11, 29, 30, 0.6) 100%
+    )
+    padding-box,
+    linear-gradient(to bottom, #939393, #2d2d2d) border-box;
+}
+
+.proc__title {
+  font-size: var(--fs-base-lg); /* 24px / 600 */
+  font-weight: var(--fw-semibold);
+  line-height: 29px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.proc__body {
+  font-size: var(--fs-body); /* 16px / 400 */
+  line-height: 26px;
+  color: var(--c-white);
+  margin: var(--s-12) 0 0;
+}
+
+/* 64px numbered markers sitting on the spine */
+/* Figma "Group 123": 64px circles. The first is solid #318391; the rest are
+   #024652 with a 2px #318391 ring. Numbers are white in both cases. */
+.proc__marker {
+  position: absolute;
+  inset-block-start: 50%;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #024652;
+  border: 2px solid var(--c-teal-600);
+  color: var(--c-white);
+  font-size: 27px;
+  font-weight: var(--fw-semibold);
+  transform: translateY(-50%);
+}
+
+.proc__item:first-child .proc__marker {
+  background: var(--c-teal-600); /* #318391 */
+  border-color: var(--c-teal-600);
+}
+
+.proc__item--end .proc__marker {
+  inset-inline-start: calc(100% + 52px);
+}
+
+.proc__item--start .proc__marker {
+  inset-inline-end: calc(100% + 52px);
+}
+
+/* Figma "Frame 47485": 273x77 white pill, r=50, #318391 text at 34/600 */
+.proc__cta {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 155px;
+}
+
+.proc__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 273px;
+  height: 77px;
+  padding-inline: var(--s-32);
+  border-radius: 50px;
+  background: var(--c-white);
+  color: var(--c-teal-600);
+  font-size: 34px;
+  font-weight: var(--fw-semibold);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.proc__cta-btn:hover {
+  background: var(--c-teal-400);
+  color: var(--c-ink);
+}
+
+@media (max-width: 1180px) {
+  .proc-spine {
+    left: 32px;
+    transform: none;
+  }
+  .proc__item:nth-child(1),
+  .proc__item:nth-child(2),
+  .proc__item:nth-child(3),
+  .proc__item:nth-child(4) {
+    grid-row: auto;
+  }
+  .proc {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+    row-gap: var(--s-20);
+    padding-inline-start: 96px;
+  }
+  .proc__item--end,
+  .proc__item--start {
+    grid-column: 1;
+  }
+  .proc__card {
+    width: 100%;
+  }
+  .proc__item--end .proc__marker,
+  .proc__item--start .proc__marker {
+    inset-inline-start: auto;
+    inset-inline-end: calc(100% + 32px);
+  }
+  .proc__cta-btn {
+    font-size: 24px;
+    height: 64px;
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .proc-spine {
+    display: none;
+  }
+  .proc {
+    padding-inline-start: 0;
+  }
+  .proc__item--end .proc__marker,
+  .proc__item--start .proc__marker {
+    position: static;
+    transform: none;
+    margin-inline-end: var(--s-16);
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  .proc__card {
+    padding: var(--s-20);
+  }
+}
+
+.faq-wrap {
+  margin-block-start: var(--s-56);
+}
+
+@media (max-width: 1024px) {
+  .svc-panel__grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-32);
+  }
+  .proc {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .svc-tab {
+    font-size: var(--fs-sm);
+  }
+  .svc-chips {
+    grid-template-columns: 1fr;
+  }
+  .proc__item {
+    padding: var(--s-20);
+    gap: var(--s-16);
+  }
+  .svc-panel__cta .btn {
+    width: 100%;
+  }
+}
+
+
+/* Figma: both of these sections sit on #ffffff */
+.svc-explorer-section,
+.faq-section {
+  background: var(--c-white);
+}

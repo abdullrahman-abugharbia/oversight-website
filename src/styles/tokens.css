@@ -1,0 +1,144 @@
+/**
+ * Design tokens — extracted directly from the Oversight Figma file
+ * (file key zGZoW2Ike9ma1fn3HXiU6U). Values are the actual ones used in
+ * the design, not approximations.
+ */
+
+:root {
+  /* ---------- Brand / teal ---------- */
+  --c-teal-900: #22686d; /* primary — most-used brand fill */
+  --c-teal-800: #2a6e73;
+  --c-teal-600: #318391;
+  --c-teal-400: #90d1d7;
+  --c-teal-300: #99e2e8;
+  --c-teal-200: #bfc8c9;
+  --c-teal-100: #d2fcff;
+  --c-teal-wash: rgba(172, 238, 243, 0.1); /* #aceef3 @ 10% */
+
+  /* ---------- Ink / text ---------- */
+  --c-ink: #1b1c1a;
+  --c-ink-900: #141819;
+  --c-ink-800: #121316;
+  --c-ink-700: #121413;
+  --c-black: #000000;
+  --c-text: #4c4546; /* body copy */
+  --c-text-soft: #7e7576;
+  --c-text-muted: #718096;
+  --c-text-grey: #737373;
+  --c-text-dark: #323232;
+  --c-text-mid: #545454;
+
+  /* ---------- Surfaces ---------- */
+  --c-white: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-warm: #f5f4f0; /* warm off-white section bg */
+  --c-surface-sunk: #e4e2e1;
+  --c-white-07: rgba(255, 255, 255, 0.07);
+
+  /* ---------- Borders ---------- */
+  --c-border: #cfc4c5;
+  --c-border-warm: #dbdad6;
+  --c-border-cool: #e2e8f0;
+  --c-border-soft: #e5e5e5;
+  --c-border-warm-2: #d9d9d4;
+  --c-border-amber: #ffdfb4;
+
+  /* ---------- Status / accent ---------- */
+  --c-orange: #e37800;
+  --c-orange-600: #e3952c;
+  --c-yellow: #f2b200;
+  --c-green: #00b57a;
+  --c-green-600: #499f73;
+  --c-blue: #0087cd;
+
+  /* Diagnostic card tints — exact values from Figma */
+  --c-card-rose: #ffecea;
+  --c-card-lilac: #edefff;
+  --c-card-mint: #f2f9eb;
+
+  /* ---------- Section backgrounds (measured from Figma) ---------- */
+  --bg-about: #000000;   /* About block + stats */
+  --bg-steps: #010101;   /* 4-step journey */
+  --bg-demo: #121316;    /* thermal comparison */
+  --bg-lab: #121413;     /* NDT device lab */
+  --bg-testimonials: #000e0f;
+  --bg-mapcta: #0c0c10;
+
+  /* Additional text colours used in the design */
+  --c-ink-111: #111111;  /* detailed-services headings */
+  --c-grey-737: #737373; /* detailed-services body */
+  --c-cyan: #36dbe7;     /* highlighted step number */
+
+  /* ---------- Typography ---------- */
+  --font-sans: 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --fs-hero: 64px;
+  --fs-d1: 58px;
+  --fs-d2: 51px;
+  --fs-d3: 48px;
+  --fs-h1: 46px;
+  --fs-h2: 43px;
+  --fs-h3: 42px;
+  --fs-h4: 40px;
+  --fs-h5: 36px;
+  --fs-h6: 32px;
+  --fs-lg: 30px;
+  --fs-md: 25px;
+  --fs-base-lg: 24px;
+  --fs-lead: 18px;
+  --fs-body: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+  --fs-2xs: 12px;
+  --fs-3xs: 10px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---------- Radii ---------- */
+  --r-2: 2px;
+  --r-4: 4px;
+  --r-8: 8px;
+  --r-10: 10px;
+  --r-12: 12px;
+  --r-16: 16px;
+  --r-18: 18px;
+  --r-24: 24px;
+  --r-30: 30px;
+  --r-70: 70px;
+  --r-pill: 99px;
+
+  /* ---------- Spacing scale ---------- */
+  --s-2: 2px;
+  --s-4: 4px;
+  --s-6: 6px;
+  --s-8: 8px;
+  --s-10: 10px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-20: 20px;
+  --s-24: 24px;
+  --s-32: 32px;
+  --s-40: 40px;
+  --s-48: 48px;
+  --s-56: 56px;
+  --s-64: 64px;
+  --s-80: 80px;
+  --s-100: 100px;
+  --s-120: 120px;
+
+  /* ---------- Shadows ---------- */
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --sh-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --sh-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --sh-card: 0 8px 28px rgba(27, 28, 26, 0.08);
+
+  /* ---------- Layout ---------- */
+  --container: 1360px;
+  --container-narrow: 1280px;
+  --container-tight: 1245px;
+  --nav-h: 56px;
+}

@@ -1,0 +1,133 @@
+.footer {
+  background: #121316; /* Figma "Footer-Directory" */
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Figma: Brand-Block at x=980 (the inline-start side in RTL, 380 wide),
+   Sitemap-Columns at x=80 (709 wide). Brand comes first in DOM so RTL puts
+   it on the right, matching the design. */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: var(--s-48);
+  padding-block: var(--s-64) var(--s-48);
+  align-items: start;
+}
+
+.footer__logo {
+  background: var(--c-white);
+  border-radius: var(--r-4);
+  padding: var(--s-12) var(--s-20);
+  width: fit-content;
+}
+
+.footer__logo img {
+  height: 32px;
+  width: auto;
+}
+
+.footer__blurb {
+  margin-block-start: var(--s-24);
+  font-size: var(--fs-sm);
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 420px;
+}
+
+.footer__socials {
+  display: flex;
+  gap: var(--s-10);
+  margin-block-start: var(--s-24);
+  justify-content: flex-start;
+}
+
+.footer__socials a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-8);
+  background: var(--c-white-07);
+  color: var(--c-white);
+  transition: background-color 0.18s ease;
+}
+
+.footer__socials a:hover {
+  background: var(--c-teal-900);
+}
+
+.footer__col {
+  text-align: center;
+}
+
+.footer__title {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-bold);
+  color: var(--c-white);
+  margin-block-end: var(--s-20);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  font-size: var(--fs-sm);
+  line-height: 21px;
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.18s ease;
+}
+
+.footer__links a:hover {
+  color: var(--c-white);
+}
+
+.footer__bar {
+  background: #121316;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-16);
+  padding-block: var(--s-24);
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-32);
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+  .footer__logo,
+  .footer__blurb {
+    margin-inline-start: 0;
+  }
+  .footer__blurb {
+    text-align: start;
+    max-width: none;
+  }
+  .footer__col {
+    text-align: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    padding-block: var(--s-40) var(--s-32);
+  }
+  .footer__bar-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--s-8);
+  }
+}

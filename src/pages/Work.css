@@ -1,0 +1,655 @@
+@import './About.css';
+
+/* ==========================================================
+   Work hero + impact — Figma: a single #020a0c block, 1440x1278,
+   with soft teal corner glows and four 300x304 stat cards.
+   ========================================================== */
+.work-hero {
+  position: relative;
+  background: #020a0c;
+  overflow: hidden;
+  /* Figma: title starts at y=174; section ends 57px after the cards */
+  padding-block: 174px 57px;
+}
+
+/* Large soft teal glows bleeding in from the corners.
+   Radial rather than linear so the gradient has no visible edge. */
+/* Figma "Rectangle 53/54/55/56": rotated -43deg gradient bands, not blobs */
+.work-hero__glow {
+  position: absolute;
+  width: 1717px;
+  height: 1625px;
+  background: linear-gradient(
+    180deg,
+    rgba(49, 131, 145, 0.5) 0%,
+    rgba(15, 39, 43, 0) 62%
+  );
+  transform: rotate(-43deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.work-hero__glow--a {
+  inset-block-start: -289px;
+  left: -466px;
+}
+
+.work-hero__glow--b {
+  inset-block-start: 32px;
+  left: 1159px;
+  width: 1207px;
+  height: 1211px;
+  transform: rotate(-44deg);
+  opacity: 0.8;
+}
+
+.work-hero__scrim {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: 220px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.work-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Figma: 502x192 — 60px type on a 96px line, wrapping to exactly two lines */
+.work-hero__title {
+  position: relative;
+  width: 502px;
+  max-width: 100%;
+  font-size: 60px;
+  font-weight: var(--fw-bold);
+  line-height: 96px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+/* The swoosh is absolutely placed so it does not affect the heading's
+   intrinsic width, and so it lands exactly where Figma puts it. */
+.work-hero__swoosh {
+  position: absolute;
+  /* physical left + translateX centres identically in RTL and LTR;
+     inset-inline-start would shift twice in RTL and push it off-centre */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 248px;
+  max-width: 80%;
+  color: var(--c-teal-600); /* #318391 */
+}
+
+/* Figma: Vector at y=271 inside a title starting at y=174 → 97px down,
+   which sits between the two lines of the heading. */
+.work-hero__swoosh--title {
+  inset-block-start: 97px;
+}
+
+/* Figma: Vector at y=866, impact title at y=756 → 110px down */
+.work-hero__swoosh--impact {
+  inset-block-start: 110px;
+}
+
+/* Figma: body at y=401, title ends at y=366 → 35px gap. 802x88, 30px/44px */
+.work-hero__body {
+  font-size: 30px;
+  font-weight: var(--fw-medium);
+  line-height: 44px;
+  color: var(--c-white);
+  margin: 35px 0 0;
+  width: 802px;
+  max-width: 100%;
+}
+
+/* Figma: impact title at y=756, body ends at y=489 → 267px gap. 51px/96px */
+.impact__title {
+  position: relative;
+  font-size: 51px;
+  font-weight: var(--fw-semibold);
+  line-height: 96px;
+  color: var(--c-white);
+  margin: 267px 0 0;
+  white-space: nowrap;
+}
+
+/* Figma: cards at y=917, impact title ends at y=852 → 65px gap */
+.impact__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  justify-content: center;
+  gap: 24px;
+  margin-block-start: 65px;
+}
+
+/* Figma "Rectangle 57": teal glow fading up, #2a6e73 border, r=16, 300x304 */
+.impact__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 304px;
+  padding: 48px var(--s-20) 0;
+  border: 1px solid var(--c-teal-800);
+  border-radius: var(--r-16);
+  background: linear-gradient(to top, rgba(8, 136, 145, 0.9) 0%, rgba(9, 123, 132, 0) 100%);
+  text-align: center;
+}
+
+.impact__icon {
+  color: var(--c-teal-600);
+  line-height: 0;
+  height: 56px;
+}
+
+/* Figma: value baseline at y=148 from the card top (icon ends at 104) */
+.impact__figure {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--s-8);
+  margin-block-start: 44px;
+}
+
+.impact__prefix {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 44px;
+  color: var(--c-white);
+}
+
+.impact__value {
+  font-size: 42px;
+  font-weight: var(--fw-bold);
+  line-height: 54px;
+  color: var(--c-white);
+}
+
+/* Figma: label at y=230, value ends at y=202 → 28px gap */
+.impact__label {
+  margin-block-start: 28px;
+  font-size: 24px;
+  font-weight: var(--fw-semibold);
+  line-height: 44px;
+  color: var(--c-white);
+}
+
+/* ================= Case studies =================
+   Figma: 1280x1207 section. Header 793 wide, centred.
+   Slider of 900x635 cards, 24px gutter, #cfc4c5 border, r=16.
+   Card is split 449/449 — content on the inline-start side,
+   image on the far side. Controls: 48px circles + 64x8 dots.
+   ================================================ */
+.cases-section {
+  background: var(--c-white);
+}
+
+.cases__head {
+  max-width: 793px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.cases__title {
+  font-size: 60px; /* Figma: 60px / 700 */
+  font-weight: var(--fw-bold);
+  line-height: 96px;
+  color: #161616;
+  margin: 0;
+}
+
+.cases__sub {
+  font-size: var(--fs-base-lg); /* 24px / 500 */
+  font-weight: var(--fw-medium);
+  line-height: 37px;
+  color: #494949;
+  margin: 30px 0 0;
+}
+
+.cases {
+  --case-w: 900px;
+  --case-gap: 24px;
+  margin-block-start: 92px;
+}
+
+.cases__viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.cases__track {
+  display: flex;
+  gap: var(--case-gap);
+  align-items: stretch;
+}
+
+/* Direction-aware shift, same technique as the testimonial slider:
+   translateX would need opposite signs in RTL and LTR. */
+.case {
+  flex: 0 0 var(--case-w);
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* content | image — RTL puts content first (right) */
+  min-height: 635px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-16);
+  overflow: hidden;
+  transition: margin-inline-start 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+}
+
+.case[aria-hidden='true'] {
+  opacity: 0.45;
+}
+
+/* Fades the cards that run past the edge of the viewport */
+.cases__fade {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 220px;
+  pointer-events: none;
+  background: linear-gradient(to var(--fade-dir, left), rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0));
+}
+
+[dir='rtl'] .cases__fade {
+  --fade-dir: right;
+}
+
+.case__body {
+  display: flex;
+  flex-direction: column;
+  padding: 49px 48px;
+}
+
+.case__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-8);
+}
+
+.case__tags li {
+  font-size: var(--fs-2xs);
+  color: var(--c-teal-900);
+  background: var(--c-teal-wash);
+  border: 1px solid var(--c-teal-300);
+  border-radius: var(--r-4);
+  padding: var(--s-4) var(--s-10);
+}
+
+.case__title {
+  font-size: var(--fs-h6); /* 32px */
+  font-weight: var(--fw-semibold);
+  line-height: 43px;
+  color: var(--c-ink);
+  margin: var(--s-16) 0 0;
+}
+
+.case__points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  margin-block-start: var(--s-16);
+}
+
+.case__points li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-10);
+  font-size: var(--fs-sm);
+  line-height: 24px;
+  color: var(--c-text);
+}
+
+.case__points svg {
+  flex-shrink: 0;
+  margin-block-start: 3px;
+  color: var(--c-teal-900);
+}
+
+/* Figma "Background+Border": 353x199, #f5f4f0, r=2 */
+.case__value {
+  margin-block-start: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+  background: var(--c-surface-warm);
+  border-radius: var(--r-2);
+  padding: var(--s-24);
+  text-align: center;
+}
+
+.case__value-label {
+  font-size: var(--fs-sm);
+  color: var(--c-text-soft);
+}
+
+.case__value-num {
+  font-size: var(--fs-d3); /* 48px */
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  color: var(--c-teal-900);
+}
+
+.case__value-note {
+  font-size: var(--fs-body);
+  color: var(--c-text);
+}
+
+.case__media {
+  position: relative;
+  background: var(--c-border-warm);
+}
+
+.case__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case__media-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+/* ---- Slider controls: Figma 48px circles, 64x8 dots, centred ---- */
+.cases__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-24);
+  margin-block-start: 92px;
+}
+
+.cases__arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--c-text-soft); /* #7e7576 */
+  color: var(--c-text-soft);
+  background: transparent;
+  transition: all 0.18s ease;
+}
+
+.cases__arrow:hover {
+  border-color: var(--c-teal-900);
+  color: var(--c-teal-900);
+}
+
+.cases__arrow--primary {
+  background: var(--c-teal-900); /* #22686d */
+  border-color: #f8f8f8;
+  color: var(--c-white);
+}
+
+.cases__arrow--primary:hover {
+  background: var(--c-teal-800);
+  color: var(--c-white);
+}
+
+.cases__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+  width: 64px;
+  justify-content: center;
+}
+
+.cases__dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-border);
+  transition: all 0.2s ease;
+}
+
+.cases__dots button.is-active {
+  width: 26px;
+  border-radius: var(--r-pill);
+  background: var(--c-teal-900);
+}
+
+.tst-wrap {
+  margin-block-start: var(--s-56);
+}
+
+/* ---------------- CTA ---------------- */
+/* Figma: 1440x434 background image under a dark linear gradient */
+.work-cta {
+  position: relative;
+  min-height: 434px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--c-ink);
+}
+
+.work-cta__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-cta__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.91) 32%,
+    rgba(0, 0, 0, 0.5) 54%,
+    rgba(0, 0, 0, 0.72) 79%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  pointer-events: none;
+}
+
+.work-cta__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-20);
+  padding-block: 60px;
+}
+
+.work-cta__title {
+  font-size: var(--fs-d3);
+  font-weight: var(--fw-bold);
+  line-height: 53px;
+  color: var(--c-white);
+  margin: 0;
+}
+
+.work-cta__body {
+  font-size: var(--fs-body);
+  line-height: 26px;
+  color: var(--c-white);
+  margin: 0;
+  max-width: 672px;
+}
+
+.work-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-16);
+}
+
+.work-cta__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-24);
+  margin-block-start: var(--s-16);
+}
+
+.work-cta__badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--c-white);
+}
+
+.work-cta__badges svg {
+  color: var(--c-teal-400);
+}
+
+@media (max-width: 1024px) {
+  .impact__grid {
+    grid-template-columns: repeat(2, minmax(0, 300px));
+  }
+  .impact__title {
+    font-size: var(--fs-h5);
+    margin-block-start: var(--s-80);
+  }
+  .work-hero {
+    padding-block: 140px var(--s-80);
+  }
+  .work-hero__title {
+    font-size: 40px;
+  }
+  .work-hero__body {
+    font-size: var(--fs-lead);
+  }
+  .case {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .case__media img {
+    min-height: 240px;
+  }
+  .case__body {
+    padding: var(--s-24);
+  }
+  .work-cta__title {
+    font-size: var(--fs-h5);
+  }
+}
+
+@media (max-width: 640px) {
+  .impact__grid {
+    grid-template-columns: minmax(0, 300px);
+  }
+  .impact__value {
+    font-size: 34px;
+  }
+  .work-hero__title {
+    font-size: 30px;
+  }
+  .case__value-num {
+    font-size: 34px;
+  }
+  .work-cta__title {
+    font-size: 26px;
+  }
+  .work-cta__actions .btn {
+    width: 100%;
+  }
+}
+
+
+/* ---- Work hero: relax the fixed Figma geometry on smaller screens ---- */
+@media (max-width: 1360px) {
+  .impact__title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1024px) {
+  .work-hero {
+    padding-block: 140px var(--s-64);
+  }
+  .work-hero__title {
+    width: 100%;
+    font-size: 40px;
+    line-height: 1.35;
+  }
+  .work-hero__swoosh--title {
+    position: static;
+    transform: none;
+    display: block;
+    margin: var(--s-12) auto 0;
+  }
+  .work-hero__body {
+    font-size: var(--fs-lead);
+    line-height: 30px;
+    margin-block-start: var(--s-24);
+  }
+  .impact__title {
+    font-size: var(--fs-h5);
+    line-height: 1.3;
+    margin-block-start: var(--s-80);
+  }
+  .work-hero__swoosh--impact {
+    position: static;
+    transform: none;
+    display: block;
+    margin: var(--s-12) auto 0;
+  }
+  .impact__grid {
+    grid-template-columns: repeat(2, minmax(0, 300px));
+    margin-block-start: var(--s-40);
+  }
+}
+
+@media (max-width: 700px) {
+  .work-hero__title {
+    font-size: 30px;
+  }
+  .impact__grid {
+    grid-template-columns: minmax(0, 300px);
+  }
+}
+
+/* ---- Case slider: collapse to a single-column card on small screens ---- */
+@media (max-width: 1024px) {
+  .cases {
+    --case-w: min(900px, 88vw);
+  }
+  .cases__title {
+    font-size: var(--fs-h5);
+    line-height: 1.3;
+  }
+  .cases__sub {
+    font-size: var(--fs-body);
+    line-height: 28px;
+  }
+  .case {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .case__media {
+    order: -1;
+    min-height: 240px;
+  }
+  .cases__fade {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .case__body {
+    padding: var(--s-24);
+  }
+  .case__value-num {
+    font-size: 34px;
+  }
+  .cases__controls {
+    margin-block-start: var(--s-40);
+  }
+}
