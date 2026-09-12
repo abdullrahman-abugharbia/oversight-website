@@ -1,0 +1,71 @@
+# Build the Vite app and publish dist/ to GitHub Pages.
+#
+# Pages' "Deploy from a branch" mode serves the repository as-is. For a Vite
+# app that means shipping the SOURCE index.html, whose only script tag is
+# `<script type="module" src="/src/main.tsx">`. Browsers cannot execute
+# TypeScript or JSX, so nothing mounts and the visitor gets a blank page.
+# The app has to be built first and the OUTPUT published.
+#
+# Set repository Settings -> Pages -> Source to "GitHub Actions" for this to
+# take effect; leaving it on "Deploy from a branch" keeps serving the source.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; the newer one wins.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # .env is gitignored, so the contact-form key reaches the build only from
+      # repository settings. Without this guard a missing key builds happily and
+      # the live form silently runs in mock mode — accepting enquiries, showing
+      # "we got your message", and sending nothing. Fail loudly instead.
+      - name: Require the contact-form key
+        env:
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+        run: |
+          if [ -z "$VITE_WEB3FORMS_KEY" ]; then
+            echo "::error::VITE_WEB3FORMS_KEY is not set. Add it under Settings -> Secrets and variables -> Actions -> New repository secret. Without it the deployed contact form would accept enquiries and discard them."
+            exit 1
+          fi
+
+      - name: Build
+        env:
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
