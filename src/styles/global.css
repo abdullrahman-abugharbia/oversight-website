@@ -20,21 +20,28 @@ body {
  * postcss-pxtorem (see postcss.config.js), so this single font-size decides
  * how large the entire design renders.
  *
- * The design needs 1600px of viewport to show its 1440px frame with margins.
- * 1vw hits exactly that: it yields 12.8px at a 1280px viewport (80% — what a
- * Windows box at 125% display scaling actually gets) and 16px at 1600px
- * (100% — Figma 1:1). clamp() stops it running away in either direction.
+ * Fixed at 80%, deliberately — not fluid.
  *
- *   1280px viewport → 12.8px root →  80%
- *   1440px viewport → 14.4px root →  90%
- *   1600px+         → 16px   root → 100%  (pixel-exact to Figma)
+ * The earlier `clamp(0.8rem, 1vw, 1rem)` scaled with viewport width and
+ * reached Figma 1:1 at 1600px. That defeated the point: a maximised Chrome
+ * window on a 1920x1080 screen at 125% Windows scaling is ~1536 CSS px, so it
+ * landed on ~15.4px — 96%, essentially full size, which is the size that was
+ * too big to begin with. Growing back to 100% "on wide screens" was wrong,
+ * because the screen it was meant to help IS a wide screen.
+ *
+ * 0.8rem reproduces browsing at 80% zoom exactly. On that 1920-device-px
+ * display the container renders 1440 device px either way — 75% of the screen.
+ *
+ * The trade-off: on a genuinely large monitor the design no longer grows to
+ * fill it, the way a fixed max-width layout doesn't. This one number is the
+ * only dial — raise it toward 1rem for a larger design, lower it for smaller.
  *
  * Written in rem, not px, so it multiplies the reader's own browser font-size
  * preference instead of overriding it. On the root element rem resolves
  * against that default, which is what makes this work.
  */
 html {
-  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-size: 0.8rem;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }

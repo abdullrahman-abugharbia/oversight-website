@@ -315,13 +315,21 @@ Rather than redraw anything, the build scales it:
 
 | Viewport | Root | Scale | |
 |---|---|---|---|
-| 1280px | 12.8px | 80% | Windows @ 125% scaling |
-| 1440px | 14.4px | 90% | |
-| 1600px+ | 16px | 100% | pixel-exact to Figma |
+| any desktop width | 12.8px | 80% | fixed |
 | ≤1024px | 16px | 100% | mobile override — those layouts are already small |
 
-`1vw` is not arbitrary: it yields exactly 12.8px at 1280 and 16px at 1600, so
-the curve passes through both anchor points without a magic number.
+**It is fixed, not fluid, and that was a correction.** The first attempt used
+`clamp(0.8rem, 1vw, 1rem)`, growing to Figma 1:1 at 1600px. That defeated the
+purpose: a maximised Chrome window on a 1920x1080 screen at 125% Windows
+scaling is ~1536 CSS px, which landed on ~15.4px — 96%, essentially the full
+size that was too large to begin with. Scaling up "on wide screens" was wrong,
+because the screen it was meant to help *is* a wide screen.
+
+0.8rem reproduces browsing at 80% zoom exactly: on that display the container
+renders 1440 device px either way, 75% of the screen.
+
+The trade-off is that the design no longer grows to fill a very large monitor —
+the same trade-off any fixed max-width layout makes.
 
 Written in `rem` rather than `px` so it *multiplies* the reader's browser
 font-size preference instead of overriding it.
