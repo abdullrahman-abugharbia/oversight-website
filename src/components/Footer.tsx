@@ -14,6 +14,9 @@ export default function Footer() {
         <div className="footer__brand">
           <div className="footer__logo">
             <img src={logo} alt="Oversight" />
+            <span className="footer__logo-tag" aria-hidden="true">
+              Engineering Inspection
+            </span>
           </div>
           <p className="footer__blurb">{footer.blurb}</p>
           <ul className="footer__socials">

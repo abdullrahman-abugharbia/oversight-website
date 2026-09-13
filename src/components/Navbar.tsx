@@ -53,8 +53,18 @@ export default function Navbar({ overlay = false }: Props) {
   return (
     <header className={`nav ${solid ? 'nav--solid' : 'nav--overlay'}`}>
       <div className="nav__inner container">
-        <Link to="/" className="nav__logo" aria-label="Oversight">
-          <img src={logo} alt="Oversight" />
+        {/*
+          The wordmark is a raster; the "ENGINEERING INSPECTION" strapline under
+          it is live text. That keeps it sharp at any size and lets it recolour
+          per background, which a baked-in bitmap could not. `aria-hidden` on it
+          because the link's aria-label already reads the full brand name — a
+          screen reader should not hear "Oversight" twice.
+        */}
+        <Link to="/" className="nav__logo" aria-label="Oversight — Engineering Inspection">
+          <img src={logo} alt="" />
+          <span className="nav__logo-tag" aria-hidden="true">
+            Engineering Inspection
+          </span>
         </Link>
 
         <nav className="nav__links" aria-label={ui.navAria}>

@@ -29,14 +29,51 @@
   gap: var(--s-24);
 }
 
+/*
+ * One dial for the whole lockup. The strapline is sized as a fraction of the
+ * wordmark height rather than a fixed px, so changing --logo-h keeps the two
+ * in proportion. 0.16 is what makes the strapline span the wordmark without
+ * running past it — at a fixed size it overflowed the logo on mobile.
+ */
+.nav__logo {
+  --logo-h: 80px; /* Figma is 214x56; enlarged at the brand's request */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  line-height: 1;
+}
+
 .nav__logo img {
-  height: 56px; /* Figma logo is 214x56 */
+  height: var(--logo-h);
   width: auto;
   object-fit: contain;
 }
 
+/*
+ * Strapline. Letter-spaced uppercase to match the brand lockup, and sized in em
+ * so it tracks the wordmark height instead of drifting when the logo is resized.
+ */
+.nav__logo-tag {
+  font-size: calc(var(--logo-h) * 0.16);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.22em;
+  /* letter-spacing adds a trailing gap after the final letter, which throws the
+     centring off to the left; pull it back by half. */
+  text-indent: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-teal-800);
+  white-space: nowrap;
+}
+
 .nav--overlay .nav__logo img {
   filter: brightness(0) invert(1);
+}
+
+/* Over the dark hero the wordmark is knocked out to white; #2a6e73 is too dark
+   against the photograph, so the strapline lifts to the brighter brand teal. */
+.nav--overlay .nav__logo-tag {
+  color: #46a39e;
 }
 
 /* ---------- Links ---------- */
@@ -231,7 +268,7 @@
 }
 
 .nav__drawer-logo {
-  height: 30px;
+  height: 38px;
   width: auto;
 }
 
@@ -309,8 +346,8 @@
     margin-block-start: 16px;
     margin-block-end: 12px;
   }
-  .nav__logo img {
-    height: 40px;
+  .nav__logo {
+    --logo-h: 56px;
   }
   .nav__cta {
     display: none;
