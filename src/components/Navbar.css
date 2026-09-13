@@ -36,7 +36,7 @@
  * running past it — at a fixed size it overflowed the logo on mobile.
  */
 .nav__logo {
-  --logo-h: 80px; /* Figma is 214x56; enlarged at the brand's request */
+  --logo-h: 72px; /* Figma is 214x56; enlarged at the brand's request */
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -347,7 +347,7 @@
     margin-block-end: 12px;
   }
   .nav__logo {
-    --logo-h: 56px;
+    --logo-h: 52px;
   }
   .nav__cta {
     display: none;
