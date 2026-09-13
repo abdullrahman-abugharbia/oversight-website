@@ -62,6 +62,17 @@
   gap: 30px;
 }
 
+/*
+ * Same widening as .about-hero__content, and for the same reason: the English
+ * headline is far longer than the Arabic it was laid out for, so at 542px it
+ * wrapped to SEVEN lines and drove the hero to 986px — well past a screen.
+ * At this width it takes three lines, matching Arabic, and the headline keeps
+ * its full size. .hero__body has its own 477px width, so body copy is unaffected.
+ */
+:root[lang='en'] .hero__content {
+  width: 1250px;
+}
+
 .hero__title {
   font-size: var(--fs-hero);
   font-weight: var(--fw-bold);
@@ -676,6 +687,11 @@
 @media (max-width: 768px) {
   .hero__inner {
     padding-block: 120px var(--s-64);
+    /* The desktop 88px gutter was never overridden here, so on a 375px phone
+       it ate 176px of the screen and squeezed the headline into a 199px column
+       — ten wrapped lines. .about-hero__inner already had this; Home was
+       simply missed. */
+    padding-inline: 24px;
   }
   .hero__title {
     font-size: 34px;

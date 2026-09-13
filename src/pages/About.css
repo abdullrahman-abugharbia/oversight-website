@@ -754,10 +754,19 @@
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
-  /* Bottom padding also reserves the band the .trust-strip cards occupy
-     (133px tall, 23px off the bottom), so centring keeps the text clear of
-     them instead of drifting down behind them. */
-  padding-block: 140px 190px;
+  /*
+   * flex:1 makes this column absorb the space ABOVE the cards, and
+   * align-items:center centres the text within it.
+   *
+   * It used to reserve the cards' band with a hard 190px of bottom padding
+   * while they were absolutely positioned. That is a magic number, and it was
+   * wrong: English copy runs to five lines where Arabic runs to three, so the
+   * buttons grew past the reservation and sat behind the cards. Letting the
+   * two share the column instead makes the overlap impossible in any language.
+   */
+  flex: 1 1 auto;
+  align-items: center;
+  padding-block: 140px 40px;
   padding-inline: 82px;
   display: flex;
   justify-content: flex-start;
@@ -790,6 +799,21 @@
   color: #46a39e;
 }
 
+/*
+ * English headline runs materially longer than the Arabic it was set for
+ * ("your impartial engineering eye protecting your property" against three
+ * Arabic words), so at 747px it wrapped to five lines where Arabic takes
+ * three — overflowing the hero past a screen height.
+ *
+ * Widening the column rather than shrinking the type: it restores the same
+ * three-line rhythm as Arabic and keeps the headline at full brand size.
+ * .about-hero__body carries its own 614px width, so the body copy does not
+ * stretch with it and stays at a readable measure.
+ */
+:root[lang='en'] .about-hero__content {
+  width: 1250px;
+}
+
 .about-hero__body {
   font-size: var(--fs-body);
   line-height: 26px;
@@ -809,9 +833,10 @@
 
 /* ---------- Glassmorphism trust strip ---------- */
 .trust-strip {
-  position: absolute;
-  inset-block-end: 23px; /* cards sit at y=619 in a 793px hero */
-  inset-inline: 0;
+  /* In flow, not absolute — see the note on .about-hero__inner. Still the last
+     thing in the hero, so it still sits at the bottom. */
+  position: static;
+  margin-block-end: 23px; /* Figma: cards 23px off the hero's bottom edge */
   z-index: 3;
   width: 100%;
   max-width: 1152px;
