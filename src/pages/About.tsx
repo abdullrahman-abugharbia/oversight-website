@@ -18,7 +18,10 @@ export default function About() {
   const { aboutHero, pillars, oath, whyUs, sectors, partners, aboutCta } = c.about;
   const { contact, ctaLabels, ui } = c.site;
 
-  const [filter, setFilter] = useState(partners.filters[0]);
+  /* Index, not label — the labels are translated, so a stored label would
+     stop matching (and empty the rail) as soon as the language switches.
+     Both locales list the filters in the same order. */
+  const [filter, setFilter] = useState(0);
   const logoTrack = useRef<HTMLUListElement>(null);
 
   /** Scrolls the logo rail by roughly one logo group. */
@@ -27,9 +30,9 @@ export default function About() {
     if (el) el.scrollBy({ left: dir * 320, behavior: 'smooth' });
   };
   const visible =
-    filter === partners.filters[0]
+    filter === 0
       ? partners.items
-      : partners.items.filter((p) => p.category === filter);
+      : partners.items.filter((p) => p.category === partners.filters[filter]);
 
   return (
     <>
@@ -169,14 +172,14 @@ export default function About() {
           <SectionHeader title={partners.title} />
           <div className="partners">
             <div className="partners__filters" role="tablist" aria-label={ui.partnersFilterAria}>
-              {partners.filters.map((f) => (
+              {partners.filters.map((f, i) => (
                 <button
                   key={f}
                   type="button"
                   role="tab"
-                  aria-selected={f === filter}
-                  className={`partners__filter ${f === filter ? 'is-active' : ''}`}
-                  onClick={() => setFilter(f)}
+                  aria-selected={i === filter}
+                  className={`partners__filter ${i === filter ? 'is-active' : ''}`}
+                  onClick={() => setFilter(i)}
                 >
                   {f}
                 </button>

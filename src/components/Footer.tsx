@@ -13,10 +13,7 @@ export default function Footer() {
       <div className="container footer__grid">
         <div className="footer__brand">
           <div className="footer__logo">
-            <img src={logo} alt="Oversight" />
-            <span className="footer__logo-tag" aria-hidden="true">
-              Engineering Inspection
-            </span>
+            <img src={logo} alt="Oversight — Engineering Inspection" />
           </div>
           <p className="footer__blurb">{footer.blurb}</p>
           <ul className="footer__socials">
@@ -68,7 +65,6 @@ export default function Footer() {
       <div className="footer__bar">
         <div className="container footer__bar-inner">
           <span>{footer.copyright}</span>
-          <span>{footer.legalName}</span>
         </div>
       </div>
     </footer>

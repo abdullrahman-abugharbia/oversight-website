@@ -48,7 +48,6 @@ export const en: Content = {
         { label: 'FAQ', to: '/services#faq' },
       ],
       copyright: 'All rights reserved to Oversight',
-      legalName: 'Modern Building Standards Company Ltd.',
     },
     ctaLabels: {
       freeConsult: 'Free Phone Consultation',
@@ -450,12 +449,7 @@ export const en: Content = {
       title: 'Partners who trust the accuracy of our reports',
       filters: ['All', 'Government', 'Commercial', 'Residential'],
       items: [
-        { name: 'NEOM', logo: aboutImg.partners.items[0].logo, category: 'Commercial' },
-        { name: 'SABIC', logo: aboutImg.partners.items[1].logo, category: 'Commercial' },
-        { name: 'Emaar', logo: aboutImg.partners.items[2].logo, category: 'Residential' },
-        { name: 'Almarai', logo: aboutImg.partners.items[3].logo, category: 'Commercial' },
-        { name: 'Government', logo: aboutImg.partners.items[4].logo, category: 'Government' },
-        { name: 'Ministry of Education', logo: aboutImg.partners.items[5].logo, category: 'Government' },
+        { name: 'Al-Zuwaiki Law Firm & Legal Consultants', logo: aboutImg.partners.items[0].logo, category: 'Commercial' },
       ],
     },
     aboutCta: {

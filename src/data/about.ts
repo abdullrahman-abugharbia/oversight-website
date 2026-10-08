@@ -11,12 +11,7 @@ import secEducation from '@/assets/images/img-642x400-4.webp';
 import ctaBand from '@/assets/images/gradient-band.webp';
 import digital from '@/assets/images/about-digital.webp';
 import commitment from '@/assets/images/about-commitment.webp';
-import neom from '@/assets/images/neom-logo.webp';
-import sabic from '@/assets/images/sabic-logo.webp';
-import emaar from '@/assets/images/emaar-logo.webp';
-import almarai from '@/assets/images/almarai-logo.webp';
-import gov from '@/assets/images/government-logo.webp';
-import moe from '@/assets/images/ministry-of-education-logo.webp';
+import alZuwaiki from '@/assets/images/al-zuwaiki-logo.webp';
 
 export const aboutHero = {
   /* Figma sets this as three explicit lines, the middle one in #46a39e */
@@ -161,12 +156,7 @@ export const partners = {
   title: 'شركاء يثقون بدقة تقاريرنا',
   filters: ['الكل', 'حكومي', 'تجاري', 'سكني'],
   items: [
-    { name: 'NEOM', logo: neom, category: 'تجاري' },
-    { name: 'SABIC', logo: sabic, category: 'تجاري' },
-    { name: 'Emaar', logo: emaar, category: 'سكني' },
-    { name: 'Almarai', logo: almarai, category: 'تجاري' },
-    { name: 'Government', logo: gov, category: 'حكومي' },
-    { name: 'Ministry of Education', logo: moe, category: 'حكومي' },
+    { name: 'الزويكي للمحاماة والاستشارات القانونية', logo: alZuwaiki, category: 'تجاري' },
   ] as Partner[],
 };
 

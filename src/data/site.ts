@@ -43,7 +43,6 @@ export const footer = {
     { label: 'الأسئلة الشائعة', to: '/services#faq' },
   ],
   copyright: 'جميع الحقوق محفوظة لاوفرسايت (Oversight)',
-  legalName: 'شركة معايير البناء الحديثة المحدودة',
 };
 
 export const ctaLabels = {

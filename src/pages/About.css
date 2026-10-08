@@ -503,7 +503,7 @@
 
 .partners__track {
   flex: 1;
-  height: 96px;
+  height: 160px;
   display: flex;
   align-items: center;
   gap: var(--s-40);
@@ -521,11 +521,22 @@
   display: grid;
   place-items: center;
   min-width: 160px;
-  height: 96px;
+  height: 160px;
+}
+
+/* Centre the logos when they don't fill the rail; auto margins (unlike
+   justify-content: center) keep the overflow scrollable from both ends */
+.partner:first-child {
+  margin-inline-start: auto;
+}
+
+.partner:last-child {
+  margin-inline-end: auto;
 }
 
 .partner img {
-  max-height: 48px;
+  /* Square crest-style logos need more height than wordmarks to stay legible */
+  max-height: 144px;
   width: auto;
   object-fit: contain;
   filter: grayscale(1);
