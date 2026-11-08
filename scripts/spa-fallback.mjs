@@ -14,9 +14,13 @@
  * Pages also serves /about from about.html with status 200, so each known route
  * gets its own copy of the shell. Keep ROUTES in step with the <Route> paths in
  * src/App.tsx; unknown paths still fall through to 404.html and its 404 status.
+ *
+ * dist/sitemap.xml is built from the same list, so a route added here is also
+ * submitted to search engines. public/robots.txt points crawlers at it.
  */
-import { copyFileSync, existsSync } from 'node:fs';
+import { copyFileSync, existsSync, writeFileSync } from 'node:fs';
 
+const SITE = 'https://oversight-sa.com';
 const ROUTES = ['about', 'services', 'work', 'contact'];
 
 const shell = 'dist/index.html';
@@ -30,3 +34,14 @@ for (const target of ['404', ...ROUTES]) {
   copyFileSync(shell, `dist/${target}.html`);
   console.log(`[spa-fallback] wrote dist/${target}.html`);
 }
+
+const urls = ['', ...ROUTES].map((route) => `  <url><loc>${SITE}/${route}</loc></url>`);
+writeFileSync(
+  'dist/sitemap.xml',
+  `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.join('\n')}
+</urlset>
+`,
+);
+console.log('[spa-fallback] wrote dist/sitemap.xml');
