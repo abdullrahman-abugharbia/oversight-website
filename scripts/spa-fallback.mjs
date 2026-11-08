@@ -1,5 +1,5 @@
 /*
- * Write dist/404.html as a copy of dist/index.html.
+ * Give every route a real file in dist/, and make dist/404.html the app shell.
  *
  * GitHub Pages is a static file server with no rewrite rules. It resolves
  * /contact by looking for a file at that path, finds none, and serves its 404.
@@ -7,17 +7,26 @@
  * breaks — including the /contact link now used by every CTA on the site.
  *
  * Pages serves 404.html for any unmatched path, so making it the app shell lets
- * React Router read the URL and render the right page.
+ * React Router read the URL and render the right page. That alone still answers
+ * with HTTP status 404, though: visitors never notice, but Google treats the
+ * page as missing and Search Console reports it as "Not found (404)".
+ *
+ * Pages also serves /about from about.html with status 200, so each known route
+ * gets its own copy of the shell. Keep ROUTES in step with the <Route> paths in
+ * src/App.tsx; unknown paths still fall through to 404.html and its 404 status.
  */
 import { copyFileSync, existsSync } from 'node:fs';
 
+const ROUTES = ['about', 'services', 'work', 'contact'];
+
 const shell = 'dist/index.html';
-const fallback = 'dist/404.html';
 
 if (!existsSync(shell)) {
   console.error(`[spa-fallback] ${shell} is missing — did vite build run?`);
   process.exit(1);
 }
 
-copyFileSync(shell, fallback);
-console.log(`[spa-fallback] wrote ${fallback}`);
+for (const target of ['404', ...ROUTES]) {
+  copyFileSync(shell, `dist/${target}.html`);
+  console.log(`[spa-fallback] wrote dist/${target}.html`);
+}
