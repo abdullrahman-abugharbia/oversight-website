@@ -320,16 +320,6 @@ a.channel:hover {
   line-height: 22px;
 }
 
-.form-success__mock {
-  margin-block-start: var(--s-8);
-  padding: var(--s-8) var(--s-12);
-  border-radius: var(--r-8);
-  background: var(--c-surface-warm);
-  color: var(--c-text-grey);
-  font-size: var(--fs-xs);
-  line-height: 20px;
-}
-
 /*
  * Honeypot — hidden from people, reachable by bots that parse the DOM.
  * Not `display:none`: some bots skip those, and a few skip `visibility` too.

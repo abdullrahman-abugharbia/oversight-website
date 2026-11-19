@@ -37,8 +37,6 @@ export default function Contact() {
   const [values, setValues] = useState<ContactPayload>(() => makeEmptyForm(form.reasonOptions[0]));
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
-  /** True when the send was a no-op because no delivery key is configured. */
-  const [mocked, setMocked] = useState(false);
 
   /**
    * The reason dropdown stores the translated label, so switching language
@@ -76,8 +74,7 @@ export default function Contact() {
     if (!validate()) return;
     setStatus('sending');
     try {
-      const res = await submitContactForm(values);
-      setMocked(!!res.mocked);
+      await submitContactForm(values);
       setStatus('sent');
       setValues(makeEmptyForm(form.reasonOptions[0]));
     } catch (err) {
@@ -119,7 +116,6 @@ export default function Contact() {
                 <CheckCircleIcon size={40} />
                 <h3>{ui.form.successTitle}</h3>
                 <p>{ui.form.successBody}</p>
-                {mocked && <p className="form-success__mock">{ui.form.mockNotice}</p>}
                 <button type="button" className="form-success__again" onClick={() => setStatus('idle')}>
                   {ui.form.sendAnother}
                 </button>
@@ -129,7 +125,7 @@ export default function Contact() {
                 {/*
                   Honeypot: off-screen and hidden from assistive tech, so a
                   person can never fill it. Bots that populate every field do,
-                  and Web3Forms discards those. tabIndex=-1 keeps it out of the
+                  and FormSubmit discards those. tabIndex=-1 keeps it out of the
                   keyboard order.
                 */}
                 <input

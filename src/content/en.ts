@@ -85,7 +85,6 @@ export const en: Content = {
         errEmail: 'Please enter a valid email address',
         failed:
         'We could not send your message. Check your connection and try again, or call us directly.',
-      mockNotice: 'Demo mode: no email was actually sent (no delivery key configured).',
       errMessage: 'Please write your message',
       },
       notFound: {
