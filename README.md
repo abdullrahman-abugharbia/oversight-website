@@ -247,37 +247,50 @@ Things worth knowing before you build on this:
 
 ## Contact form delivery
 
-The contact form posts straight from the browser to **FormSubmit**
-(<https://formsubmit.co>), which relays the message to **info@oversight-sa.com**.
-There is no backend and no key — FormSubmit is the only thing between the form
-and the email, and it is not ours to run.
+The contact form posts straight from the browser to **Web3Forms**, which relays
+the message to your inbox. There is no backend — Web3Forms is the only thing
+between the form and the email, and it is not ours to run.
 
-The recipient is `CONTACT_INBOX` in `src/utils/api.ts`. To deliver somewhere
-else, change that constant; the new address will need activating (below).
+### Setup
 
-### One-time activation
+1. Go to <https://web3forms.com>, enter the inbox that should receive enquiries.
+   They email you an access key. No account required.
+2. `cp .env.example .env` and paste the key into `VITE_WEB3FORMS_KEY`.
+3. Restart the dev server — Vite only reads `.env` at startup.
 
-FormSubmit delivers nothing to an address until that inbox confirms it. The
-first enquiry sent from the live site (or from `npm run dev`) makes FormSubmit
-email an **"Activate Form"** link to info@oversight-sa.com; until someone clicks
-it, the form shows its "could not send" error. Activation is tied to the
-website's domain, so a submission from `localhost` and one from the live domain
-may each ask once.
+Without a key the form runs in **mock mode**: it shows the success panel with a
+visible "وضع تجريبي / Demo mode" notice and sends nothing. That notice is the
+only thing stopping a demo build from telling visitors an engineer will call them.
 
-After activating, FormSubmit's email also offers a random alias for the address.
-Swapping `CONTACT_INBOX` for that alias keeps the real address out of the
-bundle, though it is already shown on the contact page.
+### About the key being public
 
-### Spam
+Vite inlines `VITE_*` variables into the bundle, so this key ships to every
+visitor. That is by design for this kind of service: the key only authorises
+*delivering a message to the inbox that owns it*. It cannot read that inbox or
+send as it. The realistic abuse is someone spamming your own inbox. The form already carries
+a **honeypot** (`botcheck`) — a field hidden from people that bots fill in, which
+Web3Forms then discards.
 
-The address ships in the bundle, so the realistic abuse is someone spamming the
-inbox. The form carries a **honeypot** (`botcheck`, sent as FormSubmit's
-`_honey`) — a field hidden from people that bots fill in, which FormSubmit then
-discards. FormSubmit's own captcha page is off (`_captcha: 'false'`) because it
-does not apply to AJAX submissions.
+Free-plan spam options, per their pricing table: honeypot (wired), "advanced
+spam protection" (automatic), and **hCaptcha** (available, not yet wired).
+reCaptcha v3, Cloudflare Turnstile and **domain restriction** are paid.
 
-The form sets `_replyto`, so hitting reply in the inbox answers the person who
-filled the form.
+A secret that must stay secret (an SMTP password, a mail API key) can never live
+in a frontend, which is why the relay exists.
+
+### Changing who receives enquiries
+
+You **cannot** set the recipient in this codebase, and that is deliberate on
+Web3Forms' side: the key is public, so if a `to_email` field existed anyone
+could repoint your form at an address of their choosing. One key delivers to one
+inbox — the one that registered it.
+
+To send enquiries somewhere else, generate a **new key** at web3forms.com against
+that address and replace `VITE_WEB3FORMS_KEY`. (CC'ing a second address is a
+paid "Pro" feature, via a `ccemail` field.)
+
+What the form *does* set is `replyto`, so hitting reply in the inbox answers the
+person who filled the form rather than Web3Forms.
 
 ### Still mocked
 

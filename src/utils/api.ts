@@ -2,20 +2,16 @@
  * The ONLY place the UI talks to the outside world.
  *
  * Still no backend of our own: the contact form POSTs straight from the browser
- * to FormSubmit, which relays the message to the inbox named in the endpoint
- * URL. Nothing server-side is ours to run or deploy, and there is no key.
+ * to Web3Forms, which relays the message to the inbox registered against the
+ * access key. Nothing server-side is ours to run or deploy.
  *
  * A browser cannot send email by itself — SMTP needs credentials, and anything
- * in a Vite bundle is readable by anyone who opens DevTools. The recipient
- * address is therefore public, but it is already published on the contact page.
- *
- * One-time activation: the first submission makes FormSubmit email an
- * "Activate Form" link to the inbox, and nothing is delivered until someone
- * clicks it. Until then the request fails and the form shows its error state.
+ * in a Vite bundle is readable by anyone who opens DevTools. The access key
+ * below is *deliberately* public: it only authorises "deliver a message to the
+ * address that owns this key", so leaking it lets someone spam that inbox, not
+ * read it or send as it. Turn on Web3Forms' captcha/domain restrictions if that
+ * becomes a problem.
  */
-
-/** Where every contact-form enquiry is delivered. */
-export const CONTACT_INBOX = 'info@oversight-sa.com';
 
 export interface ContactPayload {
   name: string;
@@ -27,8 +23,9 @@ export interface ContactPayload {
   optIn: boolean;
   /**
    * Honeypot. Hidden from people, so it must arrive empty; a bot that fills
-   * every field it can find trips it. Sent as FormSubmit's `_honey` field,
-   * which makes FormSubmit drop the submission when it is non-empty.
+   * every field it can find trips it. Web3Forms drops the submission when
+   * `botcheck` is truthy. Free-plan spam protection — reCaptcha/Turnstile are
+   * paid add-ons.
    */
   botcheck?: string;
 }
@@ -36,47 +33,62 @@ export interface ContactPayload {
 export interface SubmitResult {
   ok: boolean;
   reference: string;
-  /** True when nothing was actually sent. */
+  /** True when no key was configured and nothing was actually sent. */
   mocked?: boolean;
 }
 
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_INBOX}`;
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const reference = (prefix: string) => `${prefix}-${Date.now().toString().slice(-6)}`;
 
 /**
- * Delivers the contact form to CONTACT_INBOX.
+ * Delivers the contact form to the inbox behind VITE_WEB3FORMS_KEY.
  *
  * Throws on failure. The caller MUST handle that — silently showing "we got
  * your message" when the request failed loses real enquiries.
  */
 export async function submitContactForm(payload: ContactPayload): Promise<SubmitResult> {
-  const res = await fetch(FORMSUBMIT_ENDPOINT, {
+  if (!accessKey) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      '[api] VITE_WEB3FORMS_KEY is not set — running in mock mode. NO email is being sent. ' +
+        'Copy .env.example to .env and add your key.',
+    );
+    await delay(900);
+    return { ok: true, reference: reference('OVS'), mocked: true };
+  }
+
+  const res = await fetch(WEB3FORMS_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
-      /* FormSubmit control fields (underscore-prefixed, not shown in the email). */
-      _subject: payload.subject || `رسالة جديدة من موقع Oversight — ${payload.name}`,
-      /* Hitting "reply" in the inbox answers the enquirer. */
-      _replyto: payload.email,
-      _template: 'table',
-      _captcha: 'false',
-      _honey: payload.botcheck || '',
+      access_key: accessKey,
+      /*
+       * Envelope fields. The RECIPIENT is not settable here — Web3Forms binds
+       * it to the inbox that registered the access key, deliberately, so a
+       * public key can't be repointed at someone else. Changing who receives
+       * enquiries means generating a new key against that address.
+       */
+      subject: payload.subject || `رسالة جديدة من موقع Oversight — ${payload.name}`,
+      from_name: payload.name,
+      email: payload.email,
+      /* Hitting "reply" in the inbox answers the enquirer, not Web3Forms. */
+      replyto: payload.email,
       /* Everything else is listed in the email body as-is. */
       name: payload.name,
       phone: payload.phone,
-      email: payload.email,
       reason: payload.reason,
       message: payload.message,
       opted_in: payload.optIn ? 'yes' : 'no',
+      botcheck: payload.botcheck || '',
     }),
   });
 
-  /* FormSubmit reports success as the string "true", not a boolean. */
-  const data: { success?: boolean | string; message?: string } = await res.json().catch(() => ({}));
-  if (!res.ok || String(data.success) !== 'true') {
-    throw new Error(data.message ?? `FormSubmit responded ${res.status}`);
+  const data: { success?: boolean; message?: string } = await res.json().catch(() => ({}));
+  if (!res.ok || !data.success) {
+    throw new Error(data.message ?? `Web3Forms responded ${res.status}`);
   }
   return { ok: true, reference: reference('OVS') };
 }
