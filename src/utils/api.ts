@@ -38,33 +38,28 @@ export interface SubmitResult {
 }
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+/**
+ * Web3Forms access key for info@oversight-sa.com. Public by design: it ships in
+ * the bundle anyway and can only deliver TO that inbox. Kept in code rather
+ * than an env var so the deploy needs no GitHub secret.
+ */
+const ACCESS_KEY = '586df4b5-3b2b-49bd-af38-fdc3233d1307';
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const reference = (prefix: string) => `${prefix}-${Date.now().toString().slice(-6)}`;
 
 /**
- * Delivers the contact form to the inbox behind VITE_WEB3FORMS_KEY.
+ * Delivers the contact form to info@oversight-sa.com, the inbox behind ACCESS_KEY.
  *
  * Throws on failure. The caller MUST handle that — silently showing "we got
  * your message" when the request failed loses real enquiries.
  */
 export async function submitContactForm(payload: ContactPayload): Promise<SubmitResult> {
-  if (!accessKey) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      '[api] VITE_WEB3FORMS_KEY is not set — running in mock mode. NO email is being sent. ' +
-        'Copy .env.example to .env and add your key.',
-    );
-    await delay(900);
-    return { ok: true, reference: reference('OVS'), mocked: true };
-  }
-
   const res = await fetch(WEB3FORMS_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
-      access_key: accessKey,
+      access_key: ACCESS_KEY,
       /*
        * Envelope fields. The RECIPIENT is not settable here — Web3Forms binds
        * it to the inbox that registered the access key, deliberately, so a

@@ -253,14 +253,9 @@ between the form and the email, and it is not ours to run.
 
 ### Setup
 
-1. Go to <https://web3forms.com>, enter the inbox that should receive enquiries.
-   They email you an access key. No account required.
-2. `cp .env.example .env` and paste the key into `VITE_WEB3FORMS_KEY`.
-3. Restart the dev server — Vite only reads `.env` at startup.
-
-Without a key the form runs in **mock mode**: it shows the success panel with a
-visible "وضع تجريبي / Demo mode" notice and sends nothing. That notice is the
-only thing stopping a demo build from telling visitors an engineer will call them.
+The access key for **info@oversight-sa.com** is `ACCESS_KEY` in
+`src/utils/api.ts`. It is kept in code, not in `.env` or a GitHub secret, so
+nothing needs configuring to build or deploy.
 
 ### About the key being public
 
@@ -286,7 +281,7 @@ could repoint your form at an address of their choosing. One key delivers to one
 inbox — the one that registered it.
 
 To send enquiries somewhere else, generate a **new key** at web3forms.com against
-that address and replace `VITE_WEB3FORMS_KEY`. (CC'ing a second address is a
+that address and replace `ACCESS_KEY` in `src/utils/api.ts`. (CC'ing a second address is a
 paid "Pro" feature, via a `ccemail` field.)
 
 What the form *does* set is `replyto`, so hitting reply in the inbox answers the
